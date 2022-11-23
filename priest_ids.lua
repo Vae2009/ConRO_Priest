@@ -345,11 +345,11 @@ local ConRO_Priest, ids = ...;
 		AngelicFeather = {spellID = 121536, talentID = 103853},
 		DesperatePrayer = {spellID = 19236},
 		DispelMagic = {spellID = 528, talentID = 103867},
-		DivineStar = {spellID = 110744, talentID = 103831},
+		DivineStar = {spellID = 122121, talentID = 103831},
 		DominantMind = {spellID = 205364, talentID = 103678},
 		Fade = {spellID = 586},
 		FlashHeal = {spellID = 2061},
-		Halo = {spellID = 120517, talentID = 103830},
+		Halo = {spellID = 120644, talentID = 103830},
 		HolyNova = {spellID = 132157, talentID = 103851},
 		LeapofFaith = {spellID = 73325, talentID = 103868},
 		Levitate = {spellID = 1706},
@@ -383,6 +383,7 @@ local ConRO_Priest, ids = ...;
 		DevouringPlague = {spellID = 335467, talentID = 103808},
 		Dispersion = {spellID = 47585, talentID = 103806},
 		MindFlay = {spellID = 15407},
+			MindFlayInsanity = {spellID = 391403, talentID = 103681},
 		MindSear = {spellID = 48045, talentID = 103807},
 		MindSpike = {spellID = 73510, talentID = 103812},
 		Mindbender = {spellID = 200174, talentID = 103788},
@@ -446,7 +447,7 @@ local ConRO_Priest, ids = ...;
 		IdolofNZoth = {spellID = 373280, talentID = 103781},
 		IdolofYoggSaron = {spellID = 373273, talentID = 103817},
 		IdolofYShaarj = {spellID = 373310, talentID = 103787},
-		InescapalbeTorment = {spellID = 373427, talentID = 103783},
+		InescapableTorment = {spellID = 373427, talentID = 103783},
 		InsidiousIre = {spellID = 373212, talentID = 103683},
 		Intangibility = {spellID = 288733, talentID = 103801},
 		LastWord = {spellID = 263716, talentID = 103794},
@@ -483,16 +484,18 @@ local ConRO_Priest, ids = ...;
 	}
 	ids.Shad_Form = {
 		Shadowform = 232698,
-		Voidform = 194249,
 		SurrendertoMadness = 193223,
 	}
 	ids.Shad_Buff = {
-		DarkThoughts = 341207,
-		PowerInfusion = nil,
+		DarkAscension = 391109,
+		MindFlayInsanity = 391401,
+		PowerInfusion = 10060,
 		PowerWordFortitude = 21562,
 		PowerWordShield = 17,
+		SurgeofDarkness = 87160,
 		UnfurlingDarkness = 341282,
 		VampiricEmbrace = 15286,
+		Voidform = 194249,
 	}
 	ids.Shad_Debuff = {
 		DevouringPlague = 335467,
