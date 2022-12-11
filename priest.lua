@@ -599,7 +599,7 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 		local _Shadowform_FORM 																												= ConRO:Form(Form.Shadowform);
 	local _VoidEruption, _VoidEruption_RDY = ConRO:AbilityReady(Ability.VoidEruption, timeShift);
 		local _Voidform_BUFF, _Voidform_CHARGES = ConRO:Aura(Buff.Voidform);
-	local _VoidBolt, _, _VoidBolt_CD																							= ConRO:AbilityReady(Ability.VoidBolt, timeShift);
+	local _VoidBolt, _VoidBolt_RDY = ConRO:AbilityReady(Ability.VoidBolt, timeShift);
 	local _VampiricTouch, _VampiricTouch_RDY																			= ConRO:AbilityReady(Ability.VampiricTouch, timeShift);
 		local _VampiricTouch_DEBUFF, _, _VampiricTouch_DUR 														= ConRO:TargetAura(Debuff.VampiricTouch, timeShift + 4);
 		local _UnfurlingDarkness_BUFF																									= ConRO:Aura(Buff.UnfurlingDarkness, timeShift);
@@ -712,8 +712,9 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 		tinsert(ConRO.SuggestedSpells, _Damnation);
 	end
 
-	if _Voidform_BUFF and _Insanity < 85 then
+	if _VoidBolt_RDY and _Voidform_BUFF then
 		tinsert(ConRO.SuggestedSpells, _VoidBolt);
+		_VoidBolt_RDY = false;
 	end
 
 	if _MindSear_RDY and ConRO_AoEButton:IsVisible() and _MindSear_enemies >= 3 then
