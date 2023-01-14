@@ -738,11 +738,6 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 		_ShadowWordDeath_RDY = false;
 	end
 
-	if _MindSpike_RDY and (tChosen[Passive.MindMelt.talentID] and not tChosen[Passive.IdolofCThun.talentID]) and ((_MindBlast_CHARGE >= _MindBlast_MCHARGE) or (_MindBlast_CHARGE >= _MindBlast_MCHARGE -1 and _MindBlast_CHARGECD < 3))  and _MindMelt_COUNT < 2 then
-		tinsert(ConRO.SuggestedSpells, _MindSpike);
-		_MindMelt_COUNT = _MindMelt_COUNT + 1;
-	end
-
 	if _MindBlast_RDY and ((_MindBlast_CHARGE >= _MindBlast_MCHARGE) or (_MindMelt_COUNT >= 2)) and currentSpell ~= _MindBlast then
 		tinsert(ConRO.SuggestedSpells, _MindBlast);
 		_MindBlast_CHARGE = _MindBlast_CHARGE - 1;
@@ -779,11 +774,6 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 	if _ShadowWordDeath_RDY and _can_Execute then
 		tinsert(ConRO.SuggestedSpells, _ShadowWordDeath);
 		_ShadowWordDeath_RDY = false;
-	end
-
-	if _MindSpike_RDY and (tChosen[Passive.MindMelt.talentID] and not tChosen[Passive.IdolofCThun.talentID]) and _MindBlast_RDY and _MindMelt_COUNT < 2 then
-		tinsert(ConRO.SuggestedSpells, _MindSpike);
-		_MindMelt_COUNT = _MindMelt_COUNT + 1;
 	end
 
 	if _MindSpike_RDY and _SurgeofDarkness_Buff then
