@@ -656,8 +656,12 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 --Warnings
 
 --Rotations
-	if select(2, ConRO:EndChannel()) == _VoidTorrent and select(1, ConRO:EndChannel()) > 1 then
+	if select(2, ConRO:EndChannel()) == _VoidTorrent and select(1, ConRO:EndChannel()) > 0.5 then
 		tinsert(ConRO.SuggestedSpells, _VoidTorrent);
+	end
+
+	if select(2, ConRO:EndChannel()) == _MindFlayInsanity and select(1, ConRO:EndChannel()) > 0.5 then
+		tinsert(ConRO.SuggestedSpells, _MindFlayInsanity);
 	end
 
 	if _Shadowform_RDY and not _Shadowform_FORM and not _Voidform_BUFF then
@@ -761,6 +765,11 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 		end
 	end
 
+	if _VoidTorrent_RDY and _VampiricTouch_DEBUFF and _ShadowWordPain_DEBUFF and ConRO:FullMode(_VoidTorrent) then
+		tinsert(ConRO.SuggestedSpells, _VoidTorrent);
+		_VoidTorrent_RDY = false;
+	end
+
 	if _VampiricTouch_RDY and (not _VampiricTouch_DEBUFF or (tChosen[Passive.Misery.talentID] and not _ShadowWordPain_DEBUFF)) and currentSpell ~= _VampiricTouch and ConRO.lastSpellId ~= _ShadowCrash and (not tChosen[Ability.ShadowCrash.talentID] or (tChosen[Ability.ShadowCrash.talentID] and _ShadowCrash_CD >= (_VampiricTouch_DUR + 1))) then
 		tinsert(ConRO.SuggestedSpells, _VampiricTouch);
 		_VampiricTouch_RDY = false;
@@ -801,12 +810,7 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 		_DarkVoid_RDY = false;
 	end
 
-	if _VoidTorrent_RDY and (_Insanity <= 35) and _VampiricTouch_DEBUFF and _ShadowWordPain_DEBUFF and ConRO:FullMode(_VoidTorrent) then
-		tinsert(ConRO.SuggestedSpells, _VoidTorrent);
-		_VoidTorrent_RDY = false;
-	end
-
-	if _MindFlayInsanity_RDY and _MindFlayInsanity_BUFF and select(2, ConRO:EndChannel()) ~= _MindFlayInsanity and tChosen[Passive.ScreamsoftheVoid.talentID] then
+	if _MindFlayInsanity_RDY and _MindFlayInsanity_BUFF and tChosen[Passive.ScreamsoftheVoid.talentID] then
 		tinsert(ConRO.SuggestedSpells, _MindFlayInsanity);
 	end
 
