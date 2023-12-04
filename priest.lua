@@ -113,31 +113,31 @@ end
 function ConRO.Priest.Under10(_, timeShift, currentSpell, gcd, tChosen, pvpChosen)
 	wipe(ConRO.SuggestedSpells)
 --Info
-	local _Player_Level																														= UnitLevel("player");
-	local _Player_Percent_Health 																									= ConRO:PercentHealth('player');
-	local _is_PvP																																	= ConRO:IsPvP();
-	local _in_combat 																															= UnitAffectingCombat('player');
-	local _party_size																															= GetNumGroupMembers();
+	local _Player_Level = UnitLevel("player");
+	local _Player_Percent_Health = ConRO:PercentHealth('player');
+	local _is_PvP = ConRO:IsPvP();
+	local _in_combat = UnitAffectingCombat('player');
+	local _party_size = GetNumGroupMembers();
 
-	local _is_PC																																	= UnitPlayerControlled("target");
-	local _is_Enemy 																															= ConRO:TarHostile();
-	local _Target_Health 																													= UnitHealth('target');
-	local _Target_Percent_Health 																									= ConRO:PercentHealth('target');
+	local _is_PC = UnitPlayerControlled("target");
+	local _is_Enemy = ConRO:TarHostile();
+	local _Target_Health = UnitHealth('target');
+	local _Target_Percent_Health = ConRO:PercentHealth('target');
 
 --Resources
 
 --Racials
-	local _AncestralCall, _AncestralCall_RDY																			= ConRO:AbilityReady(ids.Racial.AncestralCall, timeShift);
-	local _ArcanePulse, _ArcanePulse_RDY																					= ConRO:AbilityReady(ids.Racial.ArcanePulse, timeShift);
-	local _Berserking, _Berserking_RDY																						= ConRO:AbilityReady(ids.Racial.Berserking, timeShift);
-	local _ArcaneTorrent, _ArcaneTorrent_RDY																			= ConRO:AbilityReady(ids.Racial.ArcaneTorrent, timeShift);
+	local _AncestralCall, _AncestralCall_RDY = ConRO:AbilityReady(ids.Racial.AncestralCall, timeShift);
+	local _ArcanePulse, _ArcanePulse_RDY = ConRO:AbilityReady(ids.Racial.ArcanePulse, timeShift);
+	local _Berserking, _Berserking_RDY = ConRO:AbilityReady(ids.Racial.Berserking, timeShift);
+	local _ArcaneTorrent, _ArcaneTorrent_RDY = ConRO:AbilityReady(ids.Racial.ArcaneTorrent, timeShift);
 
 --Abilities
 
 --Conditions
-	local _is_moving 																															= ConRO:PlayerSpeed();
-	local _enemies_in_melee, _target_in_melee																			= ConRO:Targets("Melee");
-	local _target_in_10yrds 																											= CheckInteractDistance("target", 3);
+	local _is_moving = ConRO:PlayerSpeed();
+	local _enemies_in_melee, _target_in_melee = ConRO:Targets("Melee");
+	local _target_in_10yrds = CheckInteractDistance("target", 3);
 
 --Warnings
 
@@ -149,31 +149,31 @@ end
 function ConRO.Priest.Under10Def(_, timeShift, currentSpell, gcd, tChosen, pvpChosen)
 	wipe(ConRO.SuggestedDefSpells)
 --Info
-	local _Player_Level																														= UnitLevel("player");
-	local _Player_Percent_Health 																									= ConRO:PercentHealth('player');
-	local _is_PvP																																	= ConRO:IsPvP();
-	local _in_combat 																															= UnitAffectingCombat('player');
-	local _party_size																															= GetNumGroupMembers();
+	local _Player_Level = UnitLevel("player");
+	local _Player_Percent_Health = ConRO:PercentHealth('player');
+	local _is_PvP = ConRO:IsPvP();
+	local _in_combat = UnitAffectingCombat('player');
+	local _party_size = GetNumGroupMembers();
 
-	local _is_PC																																	= UnitPlayerControlled("target");
-	local _is_Enemy 																															= ConRO:TarHostile();
-	local _Target_Health 																													= UnitHealth('target');
-	local _Target_Percent_Health 																									= ConRO:PercentHealth('target');
+	local _is_PC = UnitPlayerControlled("target");
+	local _is_Enemy = ConRO:TarHostile();
+	local _Target_Health = UnitHealth('target');
+	local _Target_Percent_Health = ConRO:PercentHealth('target');
 
 --Resources
 
 --Racials
-	local _AncestralCall, _AncestralCall_RDY																			= ConRO:AbilityReady(ids.Racial.AncestralCall, timeShift);
-	local _ArcanePulse, _ArcanePulse_RDY																					= ConRO:AbilityReady(ids.Racial.ArcanePulse, timeShift);
-	local _Berserking, _Berserking_RDY																						= ConRO:AbilityReady(ids.Racial.Berserking, timeShift);
-	local _ArcaneTorrent, _ArcaneTorrent_RDY																			= ConRO:AbilityReady(ids.Racial.ArcaneTorrent, timeShift);
+	local _AncestralCall, _AncestralCall_RDY = ConRO:AbilityReady(ids.Racial.AncestralCall, timeShift);
+	local _ArcanePulse, _ArcanePulse_RDY = ConRO:AbilityReady(ids.Racial.ArcanePulse, timeShift);
+	local _Berserking, _Berserking_RDY = ConRO:AbilityReady(ids.Racial.Berserking, timeShift);
+	local _ArcaneTorrent, _ArcaneTorrent_RDY = ConRO:AbilityReady(ids.Racial.ArcaneTorrent, timeShift);
 
 --Abilities
 
 --Conditions
-	local _is_moving 																															= ConRO:PlayerSpeed();
-	local _enemies_in_melee, _target_in_melee																			= ConRO:Targets("Melee");
-	local _target_in_10yrds 																											= CheckInteractDistance("target", 3);
+	local _is_moving = ConRO:PlayerSpeed();
+	local _enemies_in_melee, _target_in_melee = ConRO:Targets("Melee");
+	local _target_in_10yrds = CheckInteractDistance("target", 3);
 
 --Warnings
 
@@ -230,20 +230,17 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 		local _Atonement_BUFF = ConRO:UnitAura(Buff.Atonement, timeShift, 'target', 'HELPFUL');
 		local _Atonement_COUNT = ConRO:GroupBuffCount(Buff.Atonement);
 		local _Atonement_THRESHOLD = ConRO_AtonementBox:GetNumber();
-	local _PowerWordSolace, _PowerWordSolace_RDY = ConRO:AbilityReady(Ability.PowerWordSolace, timeShift);
 	local _PsychicScream, _PsychicScream_RDY = ConRO:AbilityReady(Ability.PsychicScream, timeShift);
 	local _PurgetheWicked, _PurgetheWicked_RDY = ConRO:AbilityReady(Ability.PurgetheWicked, timeShift);
 		local _PurgetheWicked_DEBUFF = ConRO:TargetAura(Debuff.PurgetheWicked, timeShift + 3);
 	local _Rapture, _Rapture_RDY = ConRO:AbilityReady(Ability.Rapture, timeShift);
 		local _Rapture_BUFF = ConRO:Aura(Buff.Rapture, timeShift);
-	local _Schism, _Schism_RDY = ConRO:AbilityReady(Ability.Schism, timeShift);
-	local _ShadowCovenant, _ShadowCovenant_RDY = ConRO:AbilityReady(Ability.ShadowCovenant, timeShift);
-		local _ShadowCovenant_BUFF = ConRO:Aura(Buff.ShadowCovenant, timeShift);
 	local _ShadowWordDeath, _ShadowWordDeath_RDY = ConRO:AbilityReady(Ability.ShadowWordDeath, timeShift);
 	local _ShadowWordPain, _ShadowWordPain_RDY = ConRO:AbilityReady(Ability.ShadowWordPain, timeShift);
 		local _ShadowWordPain_DEBUFF = ConRO:TargetAura(Debuff.ShadowWordPain, timeShift + 3);
 		local _PoweroftheDarkSide_BUFF = ConRO:Aura(Buff.PoweroftheDarkSide, timeShift);
 	local _Shadowfiend, _Shadowfiend_RDY = ConRO:AbilityReady(Ability.Shadowfiend, timeShift);
+		local _ShadowCovenant_BUFF = ConRO:Aura(Buff.ShadowCovenant, timeShift);
 		local _Shadowfiend_ID = select(7, GetSpellInfo(GetSpellInfo(Ability.Shadowfiend)));
 	local _Smite, _Smite_RDY = ConRO:AbilityReady(Ability.Smite, timeShift);
 
@@ -319,14 +316,6 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 			tinsert(ConRO.SuggestedSpells, _MindBlast);
 		end
 
-		if _ShadowCovenant_RDY then
-			tinsert(ConRO.SuggestedSpells, _ShadowCovenant);
-		end
-
-		if _Schism_RDY and currentSpell ~= _Schism then
-			tinsert(ConRO.SuggestedSpells, _Schism);
-		end
-
 		if _Penance_RDY then
 			tinsert(ConRO.SuggestedSpells, _Penance);
 		end
@@ -345,10 +334,6 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 
 		if _MindBlast_RDY and currentSpell ~= _MindBlast then
 			tinsert(ConRO.SuggestedSpells, _MindBlast);
-		end
-
-		if _PowerWordSolace_RDY then
-			tinsert(ConRO.SuggestedSpells, _PowerWordSolace);
 		end
 
 		if _Mindgames_RDY then
@@ -888,7 +873,7 @@ function ConRO.Priest.ShadowDef(_, timeShift, currentSpell, gcd, tChosen, pvpCho
 			tinsert(ConRO.SuggestedDefSpells, _Dispersion);
 		end
 
-		if _Fade_RDY and not ConRO:IsSolo() and (ConRO:TarYou() or _enemies_in_melee >= 1) then
+		if _Fade_RDY and not ConRO:IsSolo() and (ConRO:TarYou() [[or _enemies_in_melee >= 1]]) then
 			tinsert(ConRO.SuggestedDefSpells, _Fade);
 		end
 

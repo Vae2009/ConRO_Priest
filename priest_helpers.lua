@@ -63,7 +63,7 @@ function ConRO:CreateRaidAtonementButton()
 		tbutton:Hide()
 		tbutton:SetAlpha(1)
 		
-		tbutton:SetText("Single")
+		tbutton:SetText("Solo")
 		tbutton:SetNormalFontObject("GameFontHighlightSmall")
 		
 		tbutton:SetScript("OnEnter", AtoneOnEnter)
@@ -128,7 +128,7 @@ function ConRO:Atonements(_Atonement_COUNT)
 		ConRO_RaidAtonementButton:SetText("Party:    ");
 		ConRO_AtonementBox:Show();
 	elseif ConRO:IsSolo() then
-		ConRO_RaidAtonementButton:SetText("Single");
+		ConRO_RaidAtonementButton:SetText("Solo");
 		ConRO_AtonementBox:Hide();
 	end
 end
