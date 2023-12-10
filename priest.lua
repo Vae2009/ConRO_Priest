@@ -873,7 +873,7 @@ function ConRO.Priest.ShadowDef(_, timeShift, currentSpell, gcd, tChosen, pvpCho
 			tinsert(ConRO.SuggestedDefSpells, _Dispersion);
 		end
 
-		if _Fade_RDY and not ConRO:IsSolo() and (ConRO:TarYou() [[or _enemies_in_melee >= 1]]) then
+		if _Fade_RDY and not ConRO:IsSolo() and (ConRO:TarYou() or _enemies_in_melee >= 1) then
 			tinsert(ConRO.SuggestedDefSpells, _Fade);
 		end
 
