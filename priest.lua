@@ -137,7 +137,7 @@ function ConRO.Priest.Under10(_, timeShift, currentSpell, gcd, tChosen, pvpChose
 --Conditions
 	local _is_moving = ConRO:PlayerSpeed();
 	local _enemies_in_melee, _target_in_melee = ConRO:Targets("Melee");
-	local _target_in_10yrds = CheckInteractDistance("target", 3);
+	local _enemies_in_10yrds, _target_in_10yrds = ConRO:Targets("10");
 
 --Warnings
 
@@ -173,7 +173,7 @@ function ConRO.Priest.Under10Def(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 --Conditions
 	local _is_moving = ConRO:PlayerSpeed();
 	local _enemies_in_melee, _target_in_melee = ConRO:Targets("Melee");
-	local _target_in_10yrds = CheckInteractDistance("target", 3);
+	local _enemies_in_10yrds, _target_in_10yrds = ConRO:Targets("10");
 
 --Warnings
 
@@ -247,7 +247,7 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 --Conditions
 	local _is_moving = ConRO:PlayerSpeed();
 	local _enemies_in_melee, _target_in_melee = ConRO:Targets("Melee");
-	local _target_in_10yrds = CheckInteractDistance("target", 3);
+	local _enemies_in_10yrds, _target_in_10yrds = ConRO:Targets("10");
 	local _can_Execute = _Target_Percent_Health < 20;
 
 	if _ShadowCovenant_BUFF then
@@ -375,7 +375,7 @@ function ConRO.Priest.DisciplineDef(_, timeShift, currentSpell, gcd, tChosen, pv
 --Conditions
 	local _is_moving = ConRO:PlayerSpeed();
 	local _enemies_in_melee, _target_in_melee = ConRO:Targets("Melee");
-	local _target_in_10yrds = CheckInteractDistance("target", 3);
+	local _enemies_in_10yrds, _target_in_10yrds = ConRO:Targets("10");
 
 --Rotations
 	if ConRO:IsSolo() and not _Atonement_BUFF then
@@ -443,7 +443,7 @@ function ConRO.Priest.Holy(_, timeShift, currentSpell, gcd, tChosen, pvpChosen)
 --Conditions
 	local _is_moving = ConRO:PlayerSpeed();
 	local _enemies_in_melee, _target_in_melee = ConRO:Targets("Melee");
-	local _target_in_10yrds = CheckInteractDistance("target", 3);
+	local _enemies_in_10yrds, _target_in_10yrds = ConRO:Targets("10");
 	local _can_Execute = _Target_Percent_Health < 20;
 
 --Indicators
@@ -524,7 +524,7 @@ function ConRO.Priest.HolyDef(_, timeShift, currentSpell, gcd, tChosen, pvpChose
 --Conditions
 	local _is_Enemy = ConRO:TarHostile();
 	local _enemies_in_melee, _target_in_melee = ConRO:Targets("Melee");
-	local _target_in_10yrds = CheckInteractDistance("target", 3);
+	local _enemies_in_10yrds, _target_in_10yrds = ConRO:Targets("10");
 
 --Rotations
 	if _PowerWordLife_RDY and _Player_Percent_Health <= 35 then
@@ -850,7 +850,7 @@ function ConRO.Priest.ShadowDef(_, timeShift, currentSpell, gcd, tChosen, pvpCho
 --Conditions
 	local _is_moving = ConRO:PlayerSpeed();
 	local _enemies_in_melee, _target_in_melee = ConRO:Targets("Melee");
-	local _target_in_10yrds = CheckInteractDistance("target", 3);
+	local _enemies_in_10yrds, _target_in_10yrds = ConRO:Targets("10");
 
 --Indicators
 
