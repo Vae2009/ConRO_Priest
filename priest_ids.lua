@@ -172,7 +172,6 @@ local ConRO_Priest, ids = ...;
 	ids.Disc_Debuff = {
 		PurgetheWicked = 204213,
 		ShadowWordPain = 589,
-		WeakenedSoul = 6788,
 	}
 	ids.Disc_PetAbility = {
 
@@ -335,7 +334,6 @@ local ConRO_Priest, ids = ...;
 	ids.Holy_Debuff = {
 		HolyFire = 14914,
 		ShadowWordPain = 589,
-		WeakenedSoul = 6788,
 	}
 	ids.Holy_PetAbility = {
 
