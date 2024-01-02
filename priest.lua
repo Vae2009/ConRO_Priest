@@ -268,7 +268,7 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 	ConRO:AbilityRaidBuffs(_PowerWordRadiance, _PowerWordRadiance_RDY and ((ConRO:InParty() or ConRO:InRaid()) and _Atonement_COUNT < _Atonement_THRESHOLD));
 
 --Warnings
-	ConRO:Warnings("Refresh Atonement!", _is_Enemy and ((ConRO:InParty() or ConRO:InRaid()) and _Atonement_COUNT < _Atonement_THRESHOLD));
+	ConRO:Warnings("Refresh Atonement!", _in_combat and _is_Enemy and ((ConRO:InParty() or ConRO:InRaid()) and _Atonement_COUNT < _Atonement_THRESHOLD));
 
 --Rotations
 	for i = 1, 2, 1 do
@@ -613,12 +613,12 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 		end
 	else
 		if _Shadowfiend_RDY and ConRO:FullMode(_Shadowfiend) then
-			if _Shadowfiend_ID == Glyph.Sha then
-				tinsert(ConRO.SuggestedSpells, Glyph.Sha);
+			if _Shadowfiend_ID == ids.Glyph.Sha then
+				tinsert(ConRO.SuggestedSpells, ids.Glyph.Sha);
 			elseif _Shadowfiend_ID == ids.Glyph.Voidling then
-				tinsert(ConRO.SuggestedSpells, Glyph.Voidling);
+				tinsert(ConRO.SuggestedSpells, ids.Glyph.Voidling);
 			elseif _Shadowfiend_ID == ids.Glyph.Lightspawn then
-				tinsert(ConRO.SuggestedSpells, Glyph.Lightspawn);
+				tinsert(ConRO.SuggestedSpells, ids.Glyph.Lightspawn);
 			else
 				tinsert(ConRO.SuggestedSpells, _Shadowfiend);
 			end
