@@ -488,6 +488,7 @@ local ConRO_Priest, ids = ...;
 	ids.Shad_Buff = {
 		DarkAscension = 391109,
 		Deathspeaker = 392511,
+		DeathsTorment = 423726,
 		MindDevourer = 373204,
 		MindFlayInsanity = 391401,
 		MindSpikeInsanity = 407468,
