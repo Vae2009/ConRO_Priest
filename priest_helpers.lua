@@ -27,8 +27,8 @@ function ConRO:CreateAtonementButton()
 		tbutton:SetText("At: " .. ConRO:GroupBuffCount(ids.Disc_Buff.Atonement))
 		tbutton:SetNormalFontObject("GameFontHighlightSmall")
 
-		tbutton:SetScript("OnEnter", AtoneOnEnter)
-		tbutton:SetScript("OnLeave", AtoneOnLeave)
+		tbutton:SetScript("OnEnter", ConROTTOnEnter)
+		tbutton:SetScript("OnLeave", ConROTTOnLeave)
 
 	local ntex = tbutton:CreateTexture()
 		ntex:SetTexture("Interface\\AddOns\\ConRO\\images\\buttonUp")
@@ -64,8 +64,8 @@ function ConRO:CreateRaidAtonementButton()
 		tbutton:SetText("Solo");
 		tbutton:SetNormalFontObject("GameFontHighlightSmall");
 
-		tbutton:SetScript("OnEnter", AtoneOnEnter);
-		tbutton:SetScript("OnLeave", AtoneOnLeave);
+		tbutton:SetScript("OnEnter", ConROTTOnEnter);
+		tbutton:SetScript("OnLeave", ConROTTOnLeave);
 
 	local box1 = CreateFrame("EditBox", 'ConRO_AtonementBox', tbutton);
 		box1:SetPoint("BOTTOMRIGHT", "ConROButtonFrame", "BOTTOMRIGHT", -1, 2);
