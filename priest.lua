@@ -226,7 +226,6 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 		local _PoweroftheDarkSide_BUFF = ConRO:Aura(Buff.PoweroftheDarkSide, timeShift);
 	local _Shadowfiend, _Shadowfiend_RDY = ConRO:AbilityReady(Ability.Shadowfiend, timeShift);
 		local _ShadowCovenant_BUFF = ConRO:Aura(Buff.ShadowCovenant, timeShift);
-		local _Shadowfiend_ID = select(7, GetSpellInfo(GetSpellInfo(Ability.Shadowfiend)));
 	local _Smite, _Smite_RDY = ConRO:AbilityReady(Ability.Smite, timeShift);
 
 	if _ShadowCovenant_BUFF then
@@ -238,7 +237,7 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 	ConRO:Atonements(_Atonement_COUNT);
 
 	local _Shadowfiend_ACTIVE = false;
-	if ConRO:Totem(_Shadowfiend) or ConRO:Totem(_Mindbender) or ConRO:Totem(ids.Glyph.Sha) or ConRO:Totem(ids.Glyph.Voidling) or ConRO:Totem(ids.Glyph.Lightspawn) then
+	if ConRO:Totem(_Shadowfiend) or ConRO:Totem(_Mindbender) then
 		_Shadowfiend_ACTIVE = true;
 	end
 --Indicators
@@ -248,10 +247,7 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 	ConRO:AbilityMovement(_AngelicFeather, _AngelicFeather_RDY);
 
 	ConRO:AbilityBurst(_Mindbender, _Mindbender_RDY and ConRO:BurstMode(_Mindbender));
-	ConRO:AbilityBurst(ids.Glyph.Sha, _Shadowfiend_ID == ids.Glyph.Sha and _Shadowfiend_RDY and (tChosen[Ability.Lenience.talentID] or _SpiritShell_BUFF or _Evangelism_CD >= 85) and not tChosen[Ability.Mindbender.talentID] and ConRO:BurstMode(_Shadowfiend));
-	ConRO:AbilityBurst(ids.Glyph.Voidling, _Shadowfiend_ID == ids.Glyph.Voidling and _Shadowfiend_RDY and (tChosen[Ability.Lenience.talentID] or _SpiritShell_BUFF or _Evangelism_CD >= 85) and not tChosen[Ability.Mindbender.talentID] and ConRO:BurstMode(_Shadowfiend));
-	ConRO:AbilityBurst(ids.Glyph.Lightspawn, _Shadowfiend_ID == ids.Glyph.Lightspawn and _Shadowfiend_RDY and (tChosen[Ability.Lenience.talentID] or _SpiritShell_BUFF or _Evangelism_CD >= 85) and not tChosen[Ability.Mindbender.talentID] and ConRO:BurstMode(_Shadowfiend));
-	ConRO:AbilityBurst(_Shadowfiend, _Shadowfiend_ID == _Shadowfiend and _Shadowfiend_RDY and (tChosen[Ability.Lenience.talentID] or _SpiritShell_BUFF or _Evangelism_CD >= 85) and not tChosen[Ability.Mindbender.talentID] and ConRO:BurstMode(_Shadowfiend));
+	ConRO:AbilityBurst(_Shadowfiend, _Shadowfiend_RDY and (tChosen[Ability.Lenience.talentID] or _SpiritShell_BUFF or _Evangelism_CD >= 85) and not tChosen[Ability.Mindbender.talentID] and ConRO:BurstMode(_Shadowfiend));
 
 	ConRO:AbilityBurst(_PowerInfusion, _PowerInfusion_RDY and ConRO:BurstMode(_PowerInfusion));
 	ConRO:AbilityBurst(_Evangelism, _Evangelism_RDY and ((ConRO:IsSolo() and _Atonement_COUNT == 1) or ((ConRO:InParty() or ConRO:InRaid()) and _Atonement_COUNT < _Atonement_THRESHOLD)));
@@ -500,8 +496,7 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 		local _, _MindSpikeInsanity_COUNT = ConRO:Aura(Buff.MindSpikeInsanity, timeShift);
 		local _, _MindMelt_COUNT = ConRO:Aura(Buff.MindMelt, timeShift);
 	local _Mindbender, _Mindbender_RDY = ConRO:AbilityReady(Ability.Mindbender, timeShift);
-		local _Mindbender_ACTIVE, _Mindbender_DUR = ConRO:Totem(_Mindbender);
-	local _Mindgames, _Mindgames_RDY = ConRO:AbilityReady(Ability.Mindgames, timeShift);
+		local _Mindbender_ACTIVE = ConRO:Totem(_Mindbender);
 	local _PowerInfusion, _PowerInfusion_RDY = ConRO:AbilityReady(Ability.PowerInfusion, timeShift);
 		local _PowerInfusion_BUFF = ConRO:Aura(Buff.PowerInfusion, timeShift);
 	local _PowerWordFortitude, _PowerWordFortitude_RDY = ConRO:AbilityReady(Ability.PowerWordFortitude, timeShift);
@@ -510,8 +505,7 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 	local _PsychicHorror, _PsychicHorror_RDY = ConRO:AbilityReady(Ability.PsychicHorror, timeShift);
 	local _PsychicScream, _PsychicScream_RDY = ConRO:AbilityReady(Ability.PsychicScream, timeShift);
 	local _Shadowfiend, _Shadowfiend_RDY = ConRO:AbilityReady(Ability.Shadowfiend, timeShift);
-		local _Shadowfiend_ID = select(7, GetSpellInfo(GetSpellInfo(Ability.Shadowfiend)));
-		local _Shadowfiend_ACTIVE, _Shadowfiend_DUR = ConRO:Totem(_Shadowfiend);
+		local _Shadowfiend_ACTIVE = ConRO:Totem(_Shadowfiend);
 	local _Silence, _Silence_RDY = ConRO:AbilityReady(Ability.Silence, timeShift);
 	local _ShadowCrash, _ShadowCrash_RDY, _ShadowCrash_CD = ConRO:AbilityReady(Ability.ShadowCrash, timeShift);
 	local _ShadowWordDeath, _ShadowWordDeath_RDY = ConRO:AbilityReady(Ability.ShadowWordDeath, timeShift);
@@ -552,7 +546,7 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 	end
 
 	if tChosen[Ability.Mindbender.talentID] then
-		_Shadowfiend_ACTIVE, _Shadowfiend_DUR = _Mindbender_ACTIVE, _Mindbender_DUR
+		_Shadowfiend_ACTIVE = _Mindbender_ACTIVE;
 	end
 
 --Indicators
@@ -569,13 +563,8 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 	ConRO:AbilityBurst(_PowerInfusion, _PowerInfusion_RDY and not _Voidform_BUFF and _Insanity >= 40 and ConRO:BurstMode(_PowerInfusion));
 	ConRO:AbilityBurst(_VoidTorrent, _VoidTorrent_RDY and not _Voidform_BUFF and _VampiricTouch_DEBUFF and _ShadowWordPain_DEBUFF and ConRO:BurstMode(_VoidTorrent));
 	ConRO:AbilityBurst(_ShadowCrash, _ShadowCrash_RDY and (not _VampiricTouch_DEBUFF or _VampiricTouch_DUR <= 3));
-
-	ConRO:AbilityBurst(ids.Glyph.Sha, _Shadowfiend_ID == ids.Glyph.Sha and _Shadowfiend_RDY and not tChosen[Ability.Mindbender.talentID] and ConRO:BurstMode(_Shadowfiend));
-	ConRO:AbilityBurst(ids.Glyph.Voidling, _Shadowfiend_ID == ids.Glyph.Voidling and _Shadowfiend_RDY and not tChosen[Ability.Mindbender.talentID] and ConRO:BurstMode(_Shadowfiend));
-	ConRO:AbilityBurst(ids.Glyph.Lightspawn, _Shadowfiend_ID == ids.Glyph.Lightspawn and _Shadowfiend_RDY and not tChosen[Ability.Mindbender.talentID] and ConRO:BurstMode(_Shadowfiend));
-	ConRO:AbilityBurst(_Shadowfiend, _Shadowfiend_ID == _Shadowfiend and _Shadowfiend_RDY and not tChosen[Ability.Mindbender.talentID] and ConRO:BurstMode(_Shadowfiend));
+	ConRO:AbilityBurst(_Shadowfiend, _Shadowfiend_RDY and not tChosen[Ability.Mindbender.talentID] and ConRO:BurstMode(_Shadowfiend));
 	ConRO:AbilityBurst(_Mindbender, _Mindbender_RDY and ConRO:BurstMode(_Mindbender, timeShift));
-	ConRO:AbilityBurst(_Mindgames, _Mindgames_RDY and (_Voidform_BUFF or (_VampiricTouch_DEBUFF and _ShadowWordPain_DEBUFF and _DevouringPlague_DEBUFF)) and ConRO:BurstMode(_Mindgames));
 
 --Warnings
 
@@ -623,15 +612,7 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 			end
 		else
 			if _Shadowfiend_RDY and ConRO:FullMode(_Shadowfiend) then
-				if _Shadowfiend_ID == ids.Glyph.Sha then
-					tinsert(ConRO.SuggestedSpells, ids.Glyph.Sha);
-				elseif _Shadowfiend_ID == ids.Glyph.Voidling then
-					tinsert(ConRO.SuggestedSpells, ids.Glyph.Voidling);
-				elseif _Shadowfiend_ID == ids.Glyph.Lightspawn then
-					tinsert(ConRO.SuggestedSpells, ids.Glyph.Lightspawn);
-				else
-					tinsert(ConRO.SuggestedSpells, _Shadowfiend);
-				end
+				tinsert(ConRO.SuggestedSpells, _Shadowfiend);
 			end
 		end
 
@@ -662,11 +643,6 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 			_MindDevourer_BUFF = false;
 			_DevouringPlague_DEBUFF = true;
 			tinsert(ConRO.SuggestedSpells, _DevouringPlague);
-		end
-
-		if _ShadowWordDeath_RDY and (((_Shadowfiend_ACTIVE and tChosen[Ability.InescapableTorment.talentID]) and ConRO:CountTier() >= 2) or ConRO:CountTier() >= 4) then
-			_ShadowWordDeath_RDY = false;
-			tinsert(ConRO.SuggestedSpells, _ShadowWordDeath);
 		end
 
 		if _MindBlast_RDY and _Shadowfiend_ACTIVE and tChosen[Ability.InescapableTorment.talentID] and ((_MindBlast_CHARGE >= _MindBlast_MCHARGE) or (_MindBlast_CHARGE == _MindBlast_MCHARGE - 1 and _MindBlast_CHARGECD < 2)) and currentSpell ~= _MindBlast then
@@ -725,11 +701,6 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 			_MindFlayInsanity_BUFF = false;
 			_MindFlayInsanity_RDY = false;
 			tinsert(ConRO.SuggestedSpells, _MindFlayInsanity);
-		end
-
-		if _Mindgames_RDY and currentSpell ~= _Mindgames and ConRO:FullMode(_Mindgames) then
-			_Mindgames_RDY = false;
-			tinsert(ConRO.SuggestedSpells, _Mindgames);
 		end
 
 		if _VampiricTouch_RDY and _UnfurlingDarkness_BUFF then
