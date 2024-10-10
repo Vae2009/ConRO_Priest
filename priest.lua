@@ -199,10 +199,10 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 		local _HaloSC, _HaloSC_RDY = ConRO:AbilityReady(Ability.HaloSC, timeShift);
 	local _HolyNova, _HolyNova_RDY = ConRO:AbilityReady(Ability.HolyNova, timeShift);
 	local _Mindbender, _Mindbender_RDY = ConRO:AbilityReady(Ability.Mindbender, timeShift);
-		local _Mindbender_ACTIVE, _Mindbender_DUR = ConRO:Totem(_Mindbender);
+		local _Mindbender_ACTIVE = ConRO:Totem(_Mindbender);
 	local _MindBlast, _MindBlast_RDY = ConRO:AbilityReady(Ability.MindBlast, timeShift);
 		local _MindBlast_CHARGE, _MindBlast_MCHARGE, _MindBlast_CHARGECD = ConRO:SpellCharges(_MindBlast);
-	local _Mindgames, _Mindgames_RDY = ConRO:AbilityReady(Ability.Mindgames, timeShift);
+		local _EntropicRift_ACTIVE = ConRO:Totem(Buff.EntropicRift);
 	local _PainSuppression, _PainSuppression_RDY = ConRO:AbilityReady(Ability.PainSuppression, timeShift);
 	local _Penance, _Penance_RDY = ConRO:AbilityReady(Ability.Penance, timeShift);
 		local _DarkReprimand, _DarkReprimand_RDY = ConRO:AbilityReady(Ability.DarkReprimand, timeShift);
@@ -225,8 +225,12 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 		local _ShadowWordPain_DEBUFF = ConRO:TargetAura(Debuff.ShadowWordPain, timeShift + 3);
 		local _PoweroftheDarkSide_BUFF = ConRO:Aura(Buff.PoweroftheDarkSide, timeShift);
 	local _Shadowfiend, _Shadowfiend_RDY = ConRO:AbilityReady(Ability.Shadowfiend, timeShift);
+		local _Shadowfiend_ACTIVE = ConRO:Totem(_Shadowfiend);
 		local _ShadowCovenant_BUFF = ConRO:Aura(Buff.ShadowCovenant, timeShift);
 	local _Smite, _Smite_RDY = ConRO:AbilityReady(Ability.Smite, timeShift);
+	local _VoidBlast, _VoidBlast_RDY = ConRO:AbilityReady(Ability.VoidBlast, timeShift);
+	local _Voidwraith, _Voidwraith_RDY = ConRO:AbilityReady(Ability.Voidwraith, timeShift);
+		local _Voidwraith_ACTIVE = ConRO:Totem(_Voidwraith);
 
 	if _ShadowCovenant_BUFF then
 		_DivineStar, _DivineStar_RDY = _DivineStarSC, _DivineStarSC_RDY;
@@ -234,12 +238,20 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 		_Penance, _Penance_RDY = _DarkReprimand, _DarkReprimand_RDY;
 	end
 
+	if tChosen[Ability.Mindbender.talentID] then
+		_Shadowfiend, _Shadowfiend_RDY, _Shadowfiend_ACTIVE = _Mindbender, _Mindbender_RDY, _Mindbender_ACTIVE;
+	end
+
+	if tChosen[Ability.Voidwraith.talentID] then
+		_Shadowfiend, _Shadowfiend_RDY, _Shadowfiend_ACTIVE = _Voidwraith, _Voidwraith_RDY, _Voidwraith_ACTIVE;
+	end
+
+	if tChosen[Ability.VoidBlast.talentID] and _EntropicRift_ACTIVE then
+		_Smite, _Smite_RDY = _VoidBlast, _VoidBlast_RDY;
+	end
+
 	ConRO:Atonements(_Atonement_COUNT);
 
-	local _Shadowfiend_ACTIVE = false;
-	if ConRO:Totem(_Shadowfiend) or ConRO:Totem(_Mindbender) then
-		_Shadowfiend_ACTIVE = true;
-	end
 --Indicators
 	ConRO:AbilityInterrupt(_PsychicScream, _PsychicScream_RDY and ((ConRO:Interrupt() and _target_in_melee) or (_target_in_melee and ConRO:TarYou())));
 	ConRO:AbilityPurge(_DispelMagic, _DispelMagic_RDY and ConRO:Purgable());
@@ -275,16 +287,9 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 				_ShadowWordPain_DEBUFF = true;
 			end
 
-			if tChosen[Ability.Mindbender.talentID] then
-				if _Mindbender_RDY and ConRO:FullMode(_Mindbender) then
-					tinsert(ConRO.SuggestedSpells, _Mindbender);
-					_Mindbender_RDY = false;
-				end
-			else
-				if _Shadowfiend_RDY and ConRO:FullMode(_Shadowfiend) then
-					tinsert(ConRO.SuggestedSpells, _Shadowfiend);
-					_Shadowfiend_RDY = false;
-				end
+			if _Shadowfiend_RDY and ConRO:FullMode(_Shadowfiend) then
+				tinsert(ConRO.SuggestedSpells, _Shadowfiend);
+				_Shadowfiend_RDY = false;
 			end
 
 			if _MindBlast_RDY and currentSpell ~= _MindBlast then
