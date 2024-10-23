@@ -16,6 +16,12 @@ local ConRO_Priest, ids = ...;
 		Sha = 132603,
 		Voidling = 254232,
 	}
+	ids.HeroSpec = {
+		Voidweaver = 18,
+		Archon = 19,
+		Oracle = 20,
+	}
+
 --Discipline
 	ids.Disc_Ability = {
 	--Priest Baseline

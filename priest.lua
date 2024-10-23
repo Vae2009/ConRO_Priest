@@ -133,6 +133,9 @@ local _ArcanePulse, _ArcanePulse_RDY = _, _;
 local _Berserking, _Berserking_RDY = _, _;
 local _ArcaneTorrent, _ArcaneTorrent_RDY = _, _;
 
+local HeroSpec, Racial = ids.HeroSpec, ids.Racial;
+
+
 function ConRO:Stats()
 	_Player_Level = UnitLevel("player");
 	_Player_Percent_Health = ConRO:PercentHealth('player');
@@ -154,10 +157,10 @@ function ConRO:Stats()
 	_enemies_in_40yrds, _target_in_40yrds = ConRO:Targets("40");
 	_can_Execute = _Target_Percent_Health < 20;
 
-	_AncestralCall, _AncestralCall_RDY = ConRO:AbilityReady(ids.Racial.AncestralCall, timeShift);
-	_ArcanePulse, _ArcanePulse_RDY = ConRO:AbilityReady(ids.Racial.ArcanePulse, timeShift);
-	_Berserking, _Berserking_RDY = ConRO:AbilityReady(ids.Racial.Berserking, timeShift);
-	_ArcaneTorrent, _ArcaneTorrent_RDY = ConRO:AbilityReady(ids.Racial.ArcaneTorrent, timeShift);
+	_AncestralCall, _AncestralCall_RDY = ConRO:AbilityReady(Racial.AncestralCall, timeShift);
+	_ArcanePulse, _ArcanePulse_RDY = ConRO:AbilityReady(Racial.ArcanePulse, timeShift);
+	_Berserking, _Berserking_RDY = ConRO:AbilityReady(Racial.Berserking, timeShift);
+	_ArcaneTorrent, _ArcaneTorrent_RDY = ConRO:AbilityReady(Racial.ArcaneTorrent, timeShift);
 end
 
 function ConRO.Priest.Under10(_, timeShift, currentSpell, gcd, tChosen, pvpChosen)
@@ -551,12 +554,12 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 		_Shadowfiend_ACTIVE = ConRO:Totem(_Mindbender);
 	end
 
-	if tChosen[Ability.Voidwraith.talentID] then
+	if ConRO:HeroSpec(HeroSpec.Voidweaver) and tChosen[Ability.Voidwraith.talentID] then
 		_Shadowfiend, _Shadowfiend_RDY = ConRO:AbilityReady(Ability.Voidwraith, timeShift);
 		_Shadowfiend_ACTIVE = ConRO:Totem(_Voidwraith);
 	end
 
-	if tChosen[Ability.VoidBlast.talentID] and _EntropicRift_ACTIVE then
+	if ConRO:HeroSpec(HeroSpec.Voidweaver) and tChosen[Ability.VoidBlast.talentID] and _EntropicRift_ACTIVE then
 		_MindBlast, _MindBlast_RDY = ConRO:AbilityReady(Ability.VoidBlast, timeShift);
 	end
 
@@ -635,7 +638,7 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 			_Shadowfiend_RDY = false;
 		end
 
-		if _Halo_RDY and tChosen[Ability.PowerSurge.talentID] and currentSpell ~= _Halo then
+		if _Halo_RDY and ConRO:HeroSpec(HeroSpec.Archon) and tChosen[Ability.PowerSurge.talentID] and currentSpell ~= _Halo then
 			tinsert(ConRO.SuggestedSpells, _Halo);
 			_Insanity = _Insanity + 10;
 			_Halo_RDY = false;
@@ -760,13 +763,14 @@ function ConRO.Priest.ShadowDef(_, timeShift, currentSpell, gcd, tChosen, pvpCho
 	wipe(ConRO.SuggestedDefSpells);
 	ConRO:Stats();
 	local Ability, Form, Buff, Debuff, PetAbility, PvPTalent = ids.Shad_Ability, ids.Shad_Form, ids.Shad_Buff, ids.Shad_Debuff, ids.Shad_PetAbility, ids.Shad_PvPTalent;
+
 --Abilities
+	local _DesperatePrayer, _DesperatePrayer_RDY = ConRO:AbilityReady(Ability.DesperatePrayer, timeShift);
+	local _Dispersion, _Dispersion_RDY = ConRO:AbilityReady(Ability.Dispersion, timeShift);
+	local _Fade, _Fade_RDY = ConRO:AbilityReady(Ability.Fade, timeShift);
 	local _PowerWordLife, _PowerWordLife_RDY = ConRO:AbilityReady(Ability.PowerWordLife, timeShift);
 	local _PowerWordShield, _PowerWordShield_RDY = ConRO:AbilityReady(Ability.PowerWordShield, timeShift);
 			local _PowerWordShield_BUFF = ConRO:Aura(Buff.PowerWordShield, timeShift);
-	local _DesperatePrayer, _DesperatePrayer_RDY = ConRO:AbilityReady(Ability.DesperatePrayer, timeShift);
-	local _Fade, _Fade_RDY = ConRO:AbilityReady(Ability.Fade, timeShift);
-	local _Dispersion, _Dispersion_RDY = ConRO:AbilityReady(Ability.Dispersion, timeShift);
 	local _VampiricEmbrace, _VampiricEmbrace_RDY = ConRO:AbilityReady(Ability.VampiricEmbrace, timeShift);
 
 --Indicators

@@ -1,7 +1,7 @@
 ## Title:-|cffFFFFFFConRO|r- |cffFFFFFFPriest|r
-## Version: 11.0.3
+## Version: 11.0.4
 ## Author: Vae
-## Interface: 110002
+## Interface: 110005
 ## Dependencies: ConRO
 ## SavedVariablesPerCharacter: ConROPriest
 ## LoadOnDemand: 1
