@@ -196,19 +196,12 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 	local _AngelicFeather, _AngelicFeather_RDY = ConRO:AbilityReady(Ability.AngelicFeather, timeShift);	
 	local _DispelMagic, _DispelMagic_RDY = ConRO:AbilityReady(Ability.DispelMagic, timeShift);
 	local _DivineStar, _DivineStar_RDY = ConRO:AbilityReady(Ability.DivineStar, timeShift);
-		local _DivineStarSC, _DivineStarSC_RDY = ConRO:AbilityReady(Ability.DivineStarSC, timeShift);
 	local _Evangelism, _Evangelism_RDY, _Evangelism_CD = ConRO:AbilityReady(Ability.Evangelism, timeShift);
 	local _Halo, _Halo_RDY = ConRO:AbilityReady(Ability.Halo, timeShift);
-		local _HaloSC, _HaloSC_RDY = ConRO:AbilityReady(Ability.HaloSC, timeShift);
-	local _HolyNova, _HolyNova_RDY = ConRO:AbilityReady(Ability.HolyNova, timeShift);
-	local _Mindbender, _Mindbender_RDY = ConRO:AbilityReady(Ability.Mindbender, timeShift);
-		local _Mindbender_ACTIVE = ConRO:Totem(_Mindbender);
 	local _MindBlast, _MindBlast_RDY = ConRO:AbilityReady(Ability.MindBlast, timeShift);
 		local _MindBlast_CHARGE, _MindBlast_MCHARGE, _MindBlast_CHARGECD = ConRO:SpellCharges(_MindBlast);
 		local _EntropicRift_ACTIVE = ConRO:Totem(Buff.EntropicRift);
-	local _PainSuppression, _PainSuppression_RDY = ConRO:AbilityReady(Ability.PainSuppression, timeShift);
 	local _Penance, _Penance_RDY = ConRO:AbilityReady(Ability.Penance, timeShift);
-		local _DarkReprimand, _DarkReprimand_RDY = ConRO:AbilityReady(Ability.DarkReprimand, timeShift);
 	local _PowerInfusion, _PowerInfusion_RDY = ConRO:AbilityReady(Ability.PowerInfusion, timeShift);
 	local _PowerWordBarrier, _PowerWordBarrier_RDY = ConRO:AbilityReady(Ability.PowerWordBarrier, timeShift);
 	local _PowerWordFortitude, _PowerWordFortitude_RDY = ConRO:AbilityReady(Ability.PowerWordFortitude, timeShift);
@@ -231,26 +224,25 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 		local _Shadowfiend_ACTIVE = ConRO:Totem(_Shadowfiend);
 		local _ShadowCovenant_BUFF = ConRO:Aura(Buff.ShadowCovenant, timeShift);
 	local _Smite, _Smite_RDY = ConRO:AbilityReady(Ability.Smite, timeShift);
-	local _VoidBlast, _VoidBlast_RDY = ConRO:AbilityReady(Ability.VoidBlast, timeShift);
-	local _Voidwraith, _Voidwraith_RDY = ConRO:AbilityReady(Ability.Voidwraith, timeShift);
-		local _Voidwraith_ACTIVE = ConRO:Totem(_Voidwraith);
 
 	if _ShadowCovenant_BUFF then
-		_DivineStar, _DivineStar_RDY = _DivineStarSC, _DivineStarSC_RDY;
-		_Halo, _Halo_RDY = _HaloSC, _HaloSC_RDY;
-		_Penance, _Penance_RDY = _DarkReprimand, _DarkReprimand_RDY;
+		_DivineStar, _DivineStar_RDY = ConRO:AbilityReady(Ability.DivineStarSC, timeShift);
+		_Halo, _Halo_RDY = ConRO:AbilityReady(Ability.HaloSC, timeShift);
+		_Penance, _Penance_RDY = ConRO:AbilityReady(Ability.DarkReprimand, timeShift);
 	end
 
 	if tChosen[Ability.Mindbender.talentID] then
-		_Shadowfiend, _Shadowfiend_RDY, _Shadowfiend_ACTIVE = _Mindbender, _Mindbender_RDY, _Mindbender_ACTIVE;
+		_Shadowfiend, _Shadowfiend_RDY = ConRO:AbilityReady(Ability.Mindbender, timeShift);
+		_Shadowfiend_ACTIVE = ConRO:Totem(_Shadowfiend);
 	end
 
-	if tChosen[Ability.Voidwraith.talentID] then
-		_Shadowfiend, _Shadowfiend_RDY, _Shadowfiend_ACTIVE = _Voidwraith, _Voidwraith_RDY, _Voidwraith_ACTIVE;
+	if ConRO:HeroSpec(HeroSpec.Voidweaver) and tChosen[Ability.Voidwraith.talentID] then
+		_Shadowfiend, _Shadowfiend_RDY = ConRO:AbilityReady(Ability.Voidwraith, timeShift);
+		_Shadowfiend_ACTIVE = ConRO:Totem(_Shadowfiend);
 	end
 
-	if tChosen[Ability.VoidBlast.talentID] and _EntropicRift_ACTIVE then
-		_Smite, _Smite_RDY = _VoidBlast, _VoidBlast_RDY;
+	if ConRO:HeroSpec(HeroSpec.Voidweaver) and tChosen[Ability.VoidBlast.talentID] and _EntropicRift_ACTIVE then
+		_Smite, _Smite_RDY = ConRO:AbilityReady(Ability.VoidBlast, timeShift);
 	end
 
 	ConRO:Atonements(_Atonement_COUNT);
@@ -261,9 +253,7 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 	ConRO:AbilityPurge(_ArcaneTorrent, _ArcaneTorrent_RDY and _target_in_melee and ConRO:Purgable());
 	ConRO:AbilityMovement(_AngelicFeather, _AngelicFeather_RDY);
 
-	ConRO:AbilityBurst(_Mindbender, _Mindbender_RDY and ConRO:BurstMode(_Mindbender));
-	ConRO:AbilityBurst(_Shadowfiend, _Shadowfiend_RDY and (tChosen[Ability.Lenience.talentID] or _SpiritShell_BUFF or _Evangelism_CD >= 85) and not tChosen[Ability.Mindbender.talentID] and ConRO:BurstMode(_Shadowfiend));
-
+	ConRO:AbilityBurst(_Shadowfiend, _Shadowfiend_RDY and ConRO:BurstMode(_Shadowfiend));
 	ConRO:AbilityBurst(_PowerInfusion, _PowerInfusion_RDY and ConRO:BurstMode(_PowerInfusion));
 	ConRO:AbilityBurst(_Evangelism, _Evangelism_RDY and ((ConRO:IsSolo() and _Atonement_COUNT == 1) or ((ConRO:InParty() or ConRO:InRaid()) and _Atonement_COUNT < _Atonement_THRESHOLD)));
 
@@ -295,7 +285,7 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 				_Shadowfiend_RDY = false;
 			end
 
-			if _MindBlast_RDY and currentSpell ~= _MindBlast then
+			if _MindBlast_RDY and currentSpell ~= _MindBlast and _MindBlast_CHARGE >= 1 then
 				tinsert(ConRO.SuggestedSpells, _MindBlast);
 				_MindBlast_CHARGE = _MindBlast_CHARGE - 1;
 			end
@@ -318,11 +308,6 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 			if _Halo_RDY and currentSpell ~= _Halo then
 				tinsert(ConRO.SuggestedSpells, _Halo);
 				_Halo_RDY = false;
-			end
-
-			if _Mindgames_RDY then
-				tinsert(ConRO.SuggestedSpells, _Mindgames);
-				_Mindgames_RDY = false;
 			end
 
 			if _Smite_RDY then
@@ -551,12 +536,12 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 
 	if tChosen[Ability.Mindbender.talentID] then
 		_Shadowfiend, _Shadowfiend_RDY = ConRO:AbilityReady(Ability.Mindbender, timeShift);
-		_Shadowfiend_ACTIVE = ConRO:Totem(_Mindbender);
+		_Shadowfiend_ACTIVE = ConRO:Totem(_Shadowfiend);
 	end
 
 	if ConRO:HeroSpec(HeroSpec.Voidweaver) and tChosen[Ability.Voidwraith.talentID] then
 		_Shadowfiend, _Shadowfiend_RDY = ConRO:AbilityReady(Ability.Voidwraith, timeShift);
-		_Shadowfiend_ACTIVE = ConRO:Totem(_Voidwraith);
+		_Shadowfiend_ACTIVE = ConRO:Totem(_Shadowfiend);
 	end
 
 	if ConRO:HeroSpec(HeroSpec.Voidweaver) and tChosen[Ability.VoidBlast.talentID] and _EntropicRift_ACTIVE then
