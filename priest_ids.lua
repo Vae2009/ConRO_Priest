@@ -572,6 +572,7 @@ local ConRO_Priest, ids = ...;
 	}
 	ids.Shad_Form = {
 		Shadowform = 232698,
+		Voidform = 194249,
 	}
 	ids.Shad_Buff = {
 		DarkAscension = 391109,
