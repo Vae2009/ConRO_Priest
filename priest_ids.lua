@@ -1,202 +1,221 @@
 local ConRO_Priest, ids = ...;
 
 --General
-	ids.Racial = {
-		AncestralCall = {spellID = 274738},
-		ArcanePulse = {spellID = 260364},
-		ArcaneTorrent = {spellID = 50613},
-		Berserking = {spellID = 26297},
-		Cannibalize = {spellID = 20577},
-		GiftoftheNaaru = {spellID = 59548},
-		Shadowmeld = {spellID = 58984},
-		SpatialRift = {spellID = 256948},
-	}
-	ids.Glyph = {
-		Lightspawn = 254224,
-		Sha = 132603,
-		Voidling = 254232,
-	}
-	ids.HeroSpec = {
-		Voidweaver = 18,
-		Archon = 19,
-		Oracle = 20,
-	}
+ids.racial = {
+	AncestralCall = {spellID = 274738},
+	ArcanePulse = {spellID = 260364},
+	ArcaneTorrent = {spellID = 50613},
+	Berserking = {spellID = 26297},
+	Cannibalize = {spellID = 20577},
+	GiftoftheNaaru = {spellID = 59548},
+	Shadowmeld = {spellID = 58984},
+	SpatialRift = {spellID = 256948},
+}
+ids.glyph = {
+	Lightspawn = 254224,
+	Sha = 132603,
+	Voidling = 254232,
+}
+ids.hero_spec = {
+	Voidweaver = 18,
+	Archon = 19,
+	Oracle = 20,
+}
 
---Discipline
-	ids.Disc_Ability = {
-	--Priest Baseline
+ids.discipline = {
+	ability = {
+	--Baseline
 		DesperatePrayer = {spellID = 19236},
 		Fade = {spellID = 586},
 		FlashHeal = {spellID = 2061},
 		Levitate = {spellID = 1706},
+		MassResurrection = {spellID = 212036},
 		MindBlast = {spellID = 8092},
 		MindSoothe = {spellID = 453},
 		MindVision = {spellID = 2096},
+		Penance = {spellID = 47540},
 		PowerWordFortitude = {spellID = 21562},
 		PowerWordShield = {spellID = 17},
 		PsychicScream = {spellID = 8122},
+		Purify = {spellID = 527},
 		Resurrection = {spellID = 2006},
 		ShadowWordPain = {spellID = 589},
 		Smite = {spellID = 585},
-		--Passive
+	--Passive
 		FocusedWill = {spellID = 45243},
-	--Discipline Baseline
-		MassResurrection = {spellID = 212036},
-		Penance = {spellID = 47540},
-		Purify = {spellID = 527},
-		--Passive
 		MasteryGrace = {spellID = 271534},
 		SinsoftheMany = {spellID = 280391},
-	--Priest
-		AngelicBulwark = {spellID = 108945, talentID = 103821},
-		AngelicFeather = {spellID = 121536, talentID = 103853},
-		AngelsMercy = {spellID = 238100, talentID = 103825},
-		Apathy = {spellID = 390668, talentID = 103839},
-		Benevolence = {spellID = 415416, talentID = 115884},
-		BlessedRecovery = {spellID = 390767, talentID = 103677},
-		BindingHeals = {spellID = 368275, talentID = 103824},
-		BodyandSoul = {spellID = 64129, talentID = 103856},
-		CauterizingShadows = {spellID = 459990, talentID = 103837},
-		CrystallineReflection = {spellID = 373457, talentID = 103829},
-		DeathandMadness = {spellID = 321291, talentID = 103863},
+	--Priest Talents
+		Renew = {spellID = 139, talentID = 103869},
 		DispelMagic = {spellID = 528, talentID = 103867},
-		DivineStar = {spellID = 110744, talentID = 103831},
-		DominantMind = {spellID = 205364, talentID = 103678},
-		EssenceDevourer = {spellID = 415479, talentID = 115883},
-		FocusedMending = {spellID = 372354, talentID = 103871},
-		FromDarknessComesLight = {spellID = 390615, talentID = 103857},
-		Halo = {spellID = 120517, talentID = 103830},
-		HolyNova = {spellID = 132157, talentID = 103851},
-		ImprovedFade = {spellID = 390670, talentID = 103836},
+		Shadowfiend = {spellID = 34433, talentID = 103865},
+		PrayerofMending = {spellID = 33076, talentID = 103870},
 		ImprovedFlashHeal = {spellID = 393870, talentID = 103866},
 		ImprovedPurify = {spellID = 390632, talentID = 103855},
-		Inspiration = {spellID = 390676, talentID = 103846},
-		LeapofFaith = {spellID = 73325, talentID = 103868},
-		LightsInspiration = {spellID = 373450, talentID = 103826},
-		Manipulation = {spellID = 459985, talentID = 103818},
-		MassDispel = {spellID = 32375, talentID = 103849},
-		MentalAgility = {spellID = 341167, talentID = 103848},
-		MindControl = {spellID = 605, talentID = 103862},
-		MovewithGrace = {spellID = 390620, talentID = 103852},
-		PetrifyingScream = {spellID = 55676, talentID = 114588},
-		Phantasm = {spellID = 108942, talentID = 103834},
-		PhantomReach = {spellID = 459559, talentID = 103819},
-		PowerInfusion = {spellID = 10060, talentID = 103844},
-		PowerWordLife = {spellID = 373481, talentID = 103822},
-		PrayerofMending = {spellID = 33076, talentID = 103870},
-		ProtectiveLight = {spellID = 193063, talentID = 103858},
 		PsychicVoice = {spellID = 196704, talentID = 103845},
-		Renew = {spellID = 139, talentID = 103869},
-		Rhapsody = {spellID = 390622, talentID = 103850},
-		SanguineTeachings = {spellID = 373218, talentID = 114735},
-		Sanlayn = {spellID = 199855, talentID = 103840},
-		ShackleUndead = {spellID = 9484, talentID = 103843},
+		PetrifyingScream = {spellID = 55676, talentID = 114588},
 		ShadowWordDeath = {spellID = 32379, talentID = 103864},
-		Shadowfiend = {spellID = 34433, talentID = 103865},
-		SheerTerror = {spellID = 390919, talentID = 103860},
+		FocusedMending = {spellID = 372354, talentID = 103871},
+		HolyNova = {spellID = 132157, talentID = 103851},
+		ProtectiveLight = {spellID = 193063, talentID = 103858},
+		FromDarknessComesLight = {spellID = 390615, talentID = 103857},
+		AngelicFeather = {spellID = 121536, talentID = 103853},
+		Phantasm = {spellID = 108942, talentID = 103834},
+		DeathandMadness = {spellID = 321291, talentID = 103863},
 		SpellWarding = {spellID = 390667, talentID = 103872},
-		SurgeofLight = {spellID = 109186, talentID = 103823},
-		ThroesofPain = {spellID = 377422, talentID = 103861},
-		TitheEvasion = {spellID = 373223, talentID = 103838},
-		TranslucentImage = {spellID = 373446, talentID = 103835},
-		TwinsoftheSunPriestess = {spellID = 373466, talentID = 103832},
-		TwistofFate = {spellID = 390972, talentID = 103833},
-		UnwaveringWill = {spellID = 373456, talentID = 103847},
-		VampiricEmbrace = {spellID = 15286, talentID = 103841},
-		VoidShift = {spellID = 108968, talentID = 103820},
-		VoidShield = {spellID = 280749, talentID = 103842},
+		BlessedRecovery = {spellID = 390767, talentID = 103677},
+		Rhapsody = {spellID = 390622, talentID = 103850},
+		LeapofFaith = {spellID = 73325, talentID = 103868},
+		ShackleUndead = {spellID = 9484, talentID = 103843},
+		SheerTerror = {spellID = 390919, talentID = 103860},
 		VoidTendrils = {spellID = 108920, talentID = 103859},
+		MindControl = {spellID = 605, talentID = 103862},
+		DominantMind = {spellID = 205364, talentID = 103678},
 		WordsofthePious = {spellID = 377438, talentID = 103873},
-	--Discipline
-		AbyssalReverie = {spellID = 373054, talentID = 103709},
-		AegisofWrath = {spellID = 238135, talentID = 103688},
+		MassDispel = {spellID = 32375, talentID = 103849},
+		MovewithGrace = {spellID = 390620, talentID = 103852},
+		PowerInfusion = {spellID = 10060, talentID = 103844},
+		SanguineTeachings = {spellID = 373218, talentID = 114735},
+		VampiricEmbrace = {spellID = 15286, talentID = 103841},
+		TitheEvasion = {spellID = 373223, talentID = 103838},
+		Inspiration = {spellID = 390676, talentID = 103846},
+		MentalAgility = {spellID = 341167, talentID = 103848},
+		BodyandSoul = {spellID = 64129, talentID = 103856},
+		TwinsoftheSunPriestess = {spellID = 373466, talentID = 103832},
+		VoidShield = {spellID = 280749, talentID = 103842},
+		Sanlayn = {spellID = 199855, talentID = 103840},
+		Apathy = {spellID = 390668, talentID = 103839},
+		UnwaveringWill = {spellID = 373456, talentID = 103847},
+		TwistofFate = {spellID = 390972, talentID = 103833},
+		ThroesofPain = {spellID = 377422, talentID = 103861},
+		AngelsMercy = {spellID = 238100, talentID = 103825},
+		BindingHeals = {spellID = 368275, talentID = 103824},
+		DivineStar = {spellID = 110744, talentID = 103831},
+		Halo = {spellID = 120517, talentID = 103830},
+		TranslucentImage = {spellID = 373446, talentID = 103835},
+		CauterizingShadows = {spellID = 459990, talentID = 103837},
+		SurgeofLight = {spellID = 109186, talentID = 103823},
+		LightsInspiration = {spellID = 373450, talentID = 103826},
+		CrystallineReflection = {spellID = 373457, talentID = 103829},
+		ImprovedFade = {spellID = 390670, talentID = 103836},
+		Manipulation = {spellID = 459985, talentID = 103818},
+		Benevolence = {spellID = 415416, talentID = 115884},
+		PowerWordLife = {spellID = 373481, talentID = 103822},
+		AngelicBulwark = {spellID = 108945, talentID = 103821},
+		EssenceDevourer = {spellID = 415479, talentID = 115883},
+		VoidShift = {spellID = 108968, talentID = 103820},
+		PhantomReach = {spellID = 459559, talentID = 103819},
+	--Discipline Talents
 		Atonement = {spellID = 81749, talentID = 103723},
-		BlazeofLight = {spellID = 215768, talentID = 103693},
-		BorrowedTime = {spellID = 390691, talentID = 103729},
-		BrightPupil = {spellID = 390684, talentID = 103720},
-		Castigation = {spellID = 193134, talentID = 103702},
-		Contrition = {spellID = 197419, talentID = 103728},
-		DarkIndulgence = {spellID = 372972, talentID = 103725},
-		DivineAegis = {spellID = 47515, talentID = 103732},
-		EnduringLuminescence = {spellID = 390685, talentID = 103719},
-		Evangelism = {spellID = 246287, talentID = 103691},
-		Exaltation = {spellID = 373042, talentID = 103701},
-		Expiation = {spellID = 390832, talentID = 103711},
-		HarshDiscipline = {spellID = 373180, talentID = 103697},
-		HeavensWrath = {spellID = 421558, talentID = 103699},
-		Indemnity = {spellID = 373049, talentID = 108226},
-		InescapableTorment = {spellID = 373427, talentID = 103712},
-		Lenience = {spellID = 238063, talentID = 103692},
-		LightsPromise = {spellID = 322115, talentID = 103721},
-		LuminousBarrier = {spellID = 271466, talentID = 116182},
-		MaliciousIntent = {spellID = 372969, talentID = 103705},
-		Mindbender = {spellID = 123040, talentID = 103710},
-		OverloadedwithLight = {spellID = 421557, talentID = 103698},
-		PainandSuffering = {spellID = 390689, talentID = 103703},
-		PainSuppression = {spellID = 33206, talentID = 103713},
-		PainTransformation = {spellID = 372991, talentID = 103715},
-		PainfulPunishment = {spellID = 390686, talentID = 103726},
-		PoweroftheDarkSide = {spellID = 198068, talentID = 103724},
-		PowerWordBarrier = {spellID = 62618, talentID = 103687},
 		PowerWordRadiance = {spellID = 194509, talentID = 103722},
-		ProtectoroftheFrail = {spellID = 373035, talentID = 103714},
-		PurgetheWicked = {spellID = 204197, talentID = 103718},
-		Rapture = {spellID = 47536, talentID = 103727},
-		RevelinPurity = {spellID = 373003, talentID = 103690},
+		PainSuppression = {spellID = 33206, talentID = 103713},
+		PoweroftheDarkSide = {spellID = 198068, talentID = 103724},
+		LightsPromise = {spellID = 322115, talentID = 103721},
 		Sanctuary = {spellID = 231682, talentID = 108225},
+		PainTransformation = {spellID = 372991, talentID = 103715},
+		ProtectoroftheFrail = {spellID = 373035, talentID = 103714},
+		DarkIndulgence = {spellID = 372972, talentID = 103725},
 		Schism = {spellID = 424509, talentID = 103704},
+		BrightPupil = {spellID = 390684, talentID = 103720},
+		EnduringLuminescence = {spellID = 390685, talentID = 103719},
+		ShieldDiscipline = {spellID = 197045, talentID = 103717},
+		LuminousBarrier = {spellID = 271466, talentID = 116182},
+		PowerWordBarrier = {spellID = 62618, talentID = 103687},
+		PainfulPunishment = {spellID = 390686, talentID = 103726},
+		MaliciousIntent = {spellID = 372969, talentID = 103705},
+		encroaching_shadows = {
+			passiveID = 472568,
+			talentID = 103718
+		},
+		Evangelism = {spellID = 472433, talentID = 103727},
 		ShadowCovenant = {spellID = 314867, talentID = 103706},
 			DarkReprimand = {spellID = 400169, talentID = 103706},
 			DivineStarSC = {spellID = 122121, talentID = 103831},
 			HaloSC = {spellID = 120644, talentID = 103830},
-		ShieldDiscipline = {spellID = 197045, talentID = 103717},
-		TrainofThought = {spellID = 390693, talentID = 103731},
+		revel_in_darkness = {
+			passiveID = 373003,
+			talentID = 103690
+		},
+		divine_procession = {
+			passiveID = 472361,
+			talentID = 103728
+		},
+		Indemnity = {spellID = 373049, talentID = 108226},
+		PainandSuffering = {spellID = 390689, talentID = 103703},
 		TwilightCorruption = {spellID = 373065, talentID = 103708},
-		TwilightEquilibrium = {spellID = 390705, talentID = 103696},
-		UltimatePenience = {spellID = 421453, talentID = 103700},
-		WealandWoe = {spellID = 390786, talentID = 103694},
+		BorrowedTime = {spellID = 390691, talentID = 103729},
+		UltimatePenience = {spellID = 421453, talentID = 103702},
+		AbyssalReverie = {spellID = 373054, talentID = 103709},
+		inner_focus = {
+			passiveID = 390693,
+			talentID = 103731
+		},
+		Castigation = {spellID = 193134, talentID = 103700},
+		OverloadedwithLight = {spellID = 421557, talentID = 103698},
+		Lenience = {spellID = 238063, talentID = 103692},
 		VoidSummoner = {spellID = 390770, talentID = 103695},
-	--Hero
+		DivineAegis = {spellID = 47515, talentID = 103732},
+		BlazeofLight = {spellID = 215768, talentID = 103693},
+		HarshDiscipline = {spellID = 373180, talentID = 103697},
+		Expiation = {spellID = 390832, talentID = 103711},
+		InescapableTorment = {spellID = 373427, talentID = 103712},
+		eternal_barrier = {
+			passiveID = 238135,
+			talentID = 103688
+		},
+		WealandWoe = {spellID = 390786, talentID = 103694},
+		TwilightEquilibrium = {spellID = 390705, talentID = 103696},
+		Mindbender = {spellID = 123040, talentID = 103710},
+	--Hero Talents
 	--Oracle
-		AssuredSafety = {spellID = 440766, talentID = 117294},
-		Clairvoyance = {spellID = 428940, talentID = 117290},
-		DesperateMeasures = {spellID = 458718, talentID = 126068},
-		DivineFeathers = {spellID = 440670, talentID = 117278},
-		DivineProvidence = {spellID = 440742, talentID = 117276},
-		Fatebender = {spellID = 440743, talentID = 117303},
-		ForeseenCircumstances = {spellID = 440738, talentID = 117292},
-		MiraculousRecovery = {spellID = 440674, talentID = 119332},
-		PerfectVision = {spellID = 440661, talentID = 119330},
-		PreemptiveCare = {spellID = 440671, talentID = 117277},
 		Premonition = {spellID = 428924, talentID = 117286},
 			PremonitionofInsight = {spellID = 428933, talentID = 117286},
 			PremonitionofPiety = {spellID = 428930, talentID = 117286},
 			PremonitionofSolace = {spellID = 428934, talentID = 117286},
 			PremonitionofClairvoyance = {spellID = 440725, talentID = 117286},
 		PreventiveMeasures = {spellID = 440662, talentID = 117301},
-		ProphetsWill = {spellID = 433905, talentID = 117293},
-		SavetheDay = {spellID = 440669, talentID = 119331},
+		PreemptiveCare = {spellID = 440671, talentID = 117277},
 		WasteNoTime = {spellID = 440681, talentID = 117282},
+		MiraculousRecovery = {spellID = 440674, talentID = 119332},
+		AssuredSafety = {spellID = 440766, talentID = 117294},
+		DivineFeathers = {spellID = 440670, talentID = 117278},
+		SavetheDay = {spellID = 440669, talentID = 119331},
+		ForeseenCircumstances = {spellID = 440738, talentID = 117292},
+		ProphetsWill = {spellID = 433905, talentID = 117293},
+		DesperateMeasures = {spellID = 458718, talentID = 126068},
+		twinsight = {
+			passiveID = 440742,
+			talentID = 117276,
+		},
+		Fatebender = {spellID = 440743, talentID = 117303},
+		PerfectVision = {spellID = 440661, talentID = 119330},
+		Clairvoyance = {spellID = 428940, talentID = 117290},
 	--Voidweaver
-		CollapsingVoid = {spellID = 448403, talentID = 117297},
+		EntropicRift = {spellID = 447444, talentID = 117287},
+		NoEscape = {spellID = 451204, talentID = 117296},
 		DarkEnergy = {spellID = 451018, talentID = 123845},
+		VoidBlast = {
+			passiveID = 450405,
+			spellID = 450215,
+			talentID = 117306
+		},
+		InnerQuietus = {spellID = 448278, talentID = 117273},
+		DevourMatter = {spellID = 451840, talentID = 117271},
+		VoidEmpowerment = {spellID = 450138, talentID = 125821},
 		DarkeningHorizon = {spellID = 449912, talentID = 125982},
 		DepthofShadows = {spellID = 451308, talentID = 123842},
-		DevourMatter = {spellID = 451840, talentID = 117271},
-		EmbracetheShadow = {spellID = 451569, talentID = 123844},
-		EntropicRift = {spellID = 447444, talentID = 117287},
-		InnerQuietus = {spellID = 448278, talentID = 117273},
-		NoEscape = {spellID = 451204, talentID = 117296},
-		VoidBlastPassive = {spellID = 450405, talentID = 117306},
-			VoidBlast = {spellID = 450215, talentID = 117306},
-		VoidEmpowerment = {spellID = 450138, talentID = 125821},
+		Voidwraith = {
+			passiveID = 451234,
+			spellID = 451235,
+			talentID = 123841
+		},
+		Voidheart = {spellID = 449880, talentID = 117295},
 		VoidInfusion = {spellID = 450612, talentID = 117272},
 		VoidLeech = {spellID = 451311, talentID = 117299},
-		Voidheart = {spellID = 449880, talentID = 117295},
-		VoidwraithPassive = {spellID = 451234, talentID = 123841},
-			Voidwraith = {spellID = 451235, talentID = 123841},
-	}
-	ids.Disc_PvPTalent = {
+		EmbracetheShadow = {spellID = 451569, talentID = 123844},
+		CollapsingVoid = {spellID = 448403, talentID = 117297},
+	},
+	pvp_talent = {
 		Purification = 196162,
 		PurifiedResolve = 196439,
 		Trinity = 214205,
@@ -207,11 +226,8 @@ local ConRO_Priest, ids = ...;
 		DarkArchangel = 197871,
 		Thoughtsteal = 316262,
 		SearingLight = 215768,
-	}
-	ids.Disc_Form = {
-
-	}
-	ids.Disc_Buff = {
+	},
+	buff = {
 		Atonement = 194384,
 		EntropicRift = 459314,
 		PoweroftheDarkSide = 198069,
@@ -220,42 +236,38 @@ local ConRO_Priest, ids = ...;
 		Rapture = 47536,
 		ShadowCovenant = 322105,
 		SpiritShell = 109964,
-	}
-	ids.Disc_Debuff = {
+	},
+	debuff = {
 		PurgetheWicked = 204213,
 		ShadowWordPain = 589,
-	}
-	ids.Disc_PetAbility = {
+	},
+}
 
-	}
-
---Holy
-	ids.Holy_Ability = {
+ids.holy = {
+	ability = {
 	--Priest Baseline
 		DesperatePrayer = {spellID = 19236},
 		Fade = {spellID = 586},
 		FlashHeal = {spellID = 2061},
+		Heal = {spellID = 2060},
+		HolyFire = {spellID = 14914},
 		Levitate = {spellID = 1706},
+		MassResurrection = {spellID = 212036},
 		MindBlast = {spellID = 8092},
 		MindSoothe = {spellID = 453},
 		MindVision = {spellID = 2096},
 		PowerWordFortitude = {spellID = 21562},
 		PowerWordShield = {spellID = 17},
 		PsychicScream = {spellID = 8122},
+		Purify = {spellID = 527},
 		Resurrection = {spellID = 2006},
 		ShadowWordPain = {spellID = 589},
 		Smite = {spellID = 585},
-		--Passive
+	--Passive
 		FocusedWill = {spellID = 45243},
-	--Holy Baseline
-		Heal = {spellID = 2060},
-		HolyFire = {spellID = 14914},
-		MassResurrection = {spellID = 212036},
-		Purify = {spellID = 527},
-		--Passive
 		MasteryEchoofLight = {spellID = 77485},
 		SpiritofRedemption = {spellID = 20711},
-	--Priest
+	--Priest Talents
 		AngelicFeather = {spellID = 121536, talentID = 103853},
 		DispelMagic = {spellID = 528, talentID = 103867},
 		DivineStar = {spellID = 110744, talentID = 103831},
@@ -311,7 +323,7 @@ local ConRO_Priest, ids = ...;
 		UnwaveringWill = {spellID = 373456, talentID = 103847},
 		VoidShield = {spellID = 280749, talentID = 103842},
 		WordsofthePious = {spellID = 377438, talentID = 103873},
-	--Holy
+	--Holy Talents
 		Apotheosis = {spellID = 200183, talentID = 103743},
 		CircleofHealing = {spellID = 204883, talentID = 103758},
 		DivineHymn = {spellID = 64843, talentID = 103755},
@@ -362,8 +374,8 @@ local ConRO_Priest, ids = ...;
 		SayYourPrayers = {spellID = 391186, talentID = 103749},
 		SearingLight = {spellID = 372611, talentID = 103738},
 		TrailofLight = {spellID = 200128, talentID = 103770},
-	}
-	ids.Holy_PvPTalent = {
+	},
+	pvp_talent = {
 		HolyWard = 213610,
 		HolyWordConcentration = 289657,
 		GreaterHeal = 289666,
@@ -375,30 +387,26 @@ local ConRO_Priest, ids = ...;
 		DeliveredfromEvil = 196611,
 		Thoughtsteal = 316262,
 		DivineAscension = 328530,
-	}
-	ids.Holy_Form = {
-
-	}
-	ids.Holy_Buff = {
+	},
+	buff = {
 		PowerWordFortitude = 21562,
 		PowerWordShield = 17,
-	}
-	ids.Holy_Debuff = {
+	},
+	debuff = {
 		HolyFire = 14914,
 		ShadowWordPain = 589,
-	}
-	ids.Holy_PetAbility = {
+	},
+}
 
-	}
-
---Shadow
-	ids.Shad_Ability = {
-	--Priest Baseline
+ids.shadow = {
+	ability = {
+	--Baseline
 		DesperatePrayer = {spellID = 19236},
 		Fade = {spellID = 586},
 		FlashHeal = {spellID = 2061},
 		Levitate = {spellID = 1706},
 		MindBlast = {spellID = 8092},
+		MindFlay = {spellID = 15407},
 		MindSoothe = {spellID = 453},
 		MindVision = {spellID = 2096},
 		PowerWordFortitude = {spellID = 21562},
@@ -406,17 +414,14 @@ local ConRO_Priest, ids = ...;
 		PsychicScream = {spellID = 8122},
 		Resurrection = {spellID = 2006},
 		ShadowWordPain = {spellID = 589},
-		Smite = {spellID = 585},
-		--Passive
-		FocusedWill = {spellID = 45243},
-	--Shadow Baseline
-		MindFlay = {spellID = 15407},
 		Shadowform = {spellID = 232698},
+		Smite = {spellID = 585},
 		VampiricTouch = {spellID = 34914},
-		--Passive
+	--Passive
+		FocusedWill = {spellID = 45243},
 		Hallucinations = {spellID = 280752},
 		MasteryShadowWeaving = {spellID = 343690},
-	--Priest
+	--Priest Talents
 		AngelicBulwark = {spellID = 108945, talentID = 103821},
 		AngelicFeather = {spellID = 121536, talentID = 103853},
 		AngelsMercy = {spellID = 238100, talentID = 103825},
@@ -476,7 +481,7 @@ local ConRO_Priest, ids = ...;
 		VoidShift = {spellID = 108968, talentID = 103820},
 		VoidTendrils = {spellID = 108920, talentID = 103859},
 		WordsofthePious = {spellID = 377438, talentID = 103873},
-	--Shadow
+	--Shadow Talents
 		AncientMadness = {spellID = 341240, talentID = 103798},
 		AuspiciousSpirits = {spellID = 155271, talentID = 103811},
 		DarkAscension = {spellID = 391109, talentID = 103680},
@@ -524,7 +529,7 @@ local ConRO_Priest, ids = ...;
 		VoidTorrent = {spellID = 263165, talentID = 103796},
 		Voidtouched = {spellID = 407430, talentID = 103785},
 		WhisperingShadows = {spellID = 406777, talentID = 103682},
-	--Hero
+	--Hero Talents
 	--Archon
 		ConcentratedInfusion = {spellID = 453844, talentID = 117279},
 		DivineHalo = {spellID = 449806, talentID = 117305},
@@ -558,8 +563,8 @@ local ConRO_Priest, ids = ...;
 		Voidheart = {spellID = 449880, talentID = 117295},
 		VoidwraithPassive = {spellID = 451234, talentID = 123841},
 			Voidwraith = {spellID = 451235, talentID = 123841},
-	}
-	ids.Shad_PvPTalent = {
+	},
+	pvp_talent = {
 		VoidShield = 280749,
 		DriventoMadness = 199259,
 		MindTrauma = 199445,
@@ -569,12 +574,8 @@ local ConRO_Priest, ids = ...;
 		GreaterFade = 213602,
 		LastingPlague = 341167,
 		Thoughtsteal = 316262,
-	}
-	ids.Shad_Form = {
-		Shadowform = 232698,
-		Voidform = 194249,
-	}
-	ids.Shad_Buff = {
+	},
+	buff = {
 		DarkAscension = 391109,
 		Deathspeaker = 392511,
 		EntropicRift = 459314,
@@ -585,15 +586,14 @@ local ConRO_Priest, ids = ...;
 		PowerInfusion = 10060,
 		PowerWordFortitude = 21562,
 		PowerWordShield = 17,
+		Shadowform = 232698,
 		UnfurlingDarkness = 341282,
 		VampiricEmbrace = 15286,
 		Voidform = 194249,
-	}
-	ids.Shad_Debuff = {
+	},
+	debuff = {
 		DevouringPlague = 335467,
 		ShadowWordPain = 589,
 		VampiricTouch = 34914,
 	}
-	ids.Shad_PetAbility = {
-
-	}
+}

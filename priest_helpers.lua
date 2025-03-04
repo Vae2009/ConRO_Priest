@@ -24,7 +24,7 @@ function ConRO:CreateAtonementButton()
 		tbutton:Hide()
 		tbutton:SetAlpha(1)
 
-		tbutton:SetText("At: " .. ConRO:GroupBuffCount(ids.Disc_Buff.Atonement))
+		tbutton:SetText("At: " .. ConRO:GroupBuffCount(ids.discipline.buff.Atonement))
 		tbutton:SetNormalFontObject("GameFontHighlightSmall")
 
 		tbutton:SetScript("OnEnter", ConROTTOnEnter)

@@ -4,6 +4,7 @@ end
 ConRO.Priest.CheckPvPTalents = function()
 end
 local ConRO_Priest, ids = ...;
+local Ability, Buff, Debuff, PvPTalent = _, _, _, _;
 
 function ConRO:EnableRotationModule(mode)
 	mode = mode or 0;
@@ -13,13 +14,16 @@ function ConRO:EnableRotationModule(mode)
 	ConRO_RaidAtonementButton:Hide();
 	if mode == 0 then
 		self.Description = "Priest [No Specialization Under 10]";
-		self.NextSpell = ConRO.Priest.Under10;
+		self.NextSpell = ConRO.Priest.Disabled;
+		self.NextDef = ConRO.Priest.Disabled;
 		self.ToggleHealer();
 	end;
 	if mode == 1 then
 		self.Description = "Priest [Discipline - Healer]";
 		if ConRO.db.profile._Spec_1_Enabled then
+			Ability, Buff, Debuff, PvPTalent = ids.discipline.ability, ids.discipline.buff, ids.discipline.debuff, ids.discipline.pvp_talent;
 			self.NextSpell = ConRO.Priest.Discipline;
+			self.NextDef = ConRO.Priest.DisciplineDef;
 			self.ToggleDamage();
 			ConROButtonFrame:SetAlpha(1);
 			ConRO_ShowAtonement();
@@ -29,6 +33,7 @@ function ConRO:EnableRotationModule(mode)
 			ConRODefenseWindow:SetAlpha(ConRO.db.profile.transparencyWindow);
 		else
 			self.NextSpell = ConRO.Priest.Disabled;
+			self.NextDef = ConRO.Priest.Disabled;
 			self.ToggleHealer();
 			ConROWindow:SetAlpha(0);
 			ConROWindow2:SetAlpha(0);
@@ -39,7 +44,9 @@ function ConRO:EnableRotationModule(mode)
 	if mode == 2 then
 		self.Description = "Priest [Holy - Healer]";
 		if ConRO.db.profile._Spec_2_Enabled then
+			Ability, Buff, Debuff, PvPTalent = ids.holy.ability, ids.holy.buff, ids.holy.debuff, ids.holy.pvp_talent;
 			self.NextSpell = ConRO.Priest.Holy;
+			self.NextDef = ConRO.Priest.HolyDef;
 			self.ToggleHealer();
 			ConROWindow:SetAlpha(ConRO.db.profile.transparencyWindow);
 			ConROWindow2:SetAlpha(ConRO.db.profile.transparencyWindow);
@@ -47,6 +54,7 @@ function ConRO:EnableRotationModule(mode)
 			ConRODefenseWindow:SetAlpha(ConRO.db.profile.transparencyWindow);
 		else
 			self.NextSpell = ConRO.Priest.Disabled;
+			self.NextDef = ConRO.Priest.Disabled;
 			self.ToggleHealer();
 			ConROWindow:SetAlpha(0);
 			ConROWindow2:SetAlpha(0);
@@ -57,7 +65,9 @@ function ConRO:EnableRotationModule(mode)
 	if mode == 3 then
 		self.Description = "Priest [Shadow - Caster]";
 		if ConRO.db.profile._Spec_3_Enabled then
+			Ability, Buff, Debuff, PvPTalent = ids.shadow.ability, ids.shadow.buff, ids.shadow.debuff, ids.shadow.pvp_talent;
 			self.NextSpell = ConRO.Priest.Shadow;
+			self.NextDef = ConRO.Priest.ShadowDef;
 			self.ToggleDamage();
 			ConROWindow:SetAlpha(ConRO.db.profile.transparencyWindow);
 			ConROWindow2:SetAlpha(ConRO.db.profile.transparencyWindow);
@@ -65,6 +75,7 @@ function ConRO:EnableRotationModule(mode)
 			ConRODefenseWindow:SetAlpha(ConRO.db.profile.transparencyWindow);
 		else
 			self.NextSpell = ConRO.Priest.Disabled;
+			self.NextDef = ConRO.Priest.Disabled;
 			self.ToggleHealer();
 			ConROWindow:SetAlpha(0);
 			ConROWindow2:SetAlpha(0);
@@ -77,31 +88,7 @@ function ConRO:EnableRotationModule(mode)
 end
 
 function ConRO:EnableDefenseModule(mode)
-	mode = mode or 0;
-	if mode == 0 then
-		self.NextDef = ConRO.Priest.Under10Def;
-	end;
-	if mode == 1 then
-		if ConRO.db.profile._Spec_1_Enabled then
-			self.NextDef = ConRO.Priest.DisciplineDef;
-		else
-			self.NextDef = ConRO.Priest.Disabled;
-		end
-	end;
-	if mode == 2 then
-		if ConRO.db.profile._Spec_2_Enabled then
-			self.NextDef = ConRO.Priest.HolyDef;
-		else
-			self.NextDef = ConRO.Priest.Disabled;
-		end
-	end;
-	if mode == 3 then
-		if ConRO.db.profile._Spec_3_Enabled then
-			self.NextDef = ConRO.Priest.ShadowDef;
-		else
-			self.NextDef = ConRO.Priest.Disabled;
-		end
-	end;
+
 end
 
 function ConRO:UNIT_SPELLCAST_SUCCEEDED(event, unitID, lineID, spellID)
@@ -146,7 +133,7 @@ local _ArcanePulse, _ArcanePulse_RDY = _, _;
 local _Berserking, _Berserking_RDY = _, _;
 local _ArcaneTorrent, _ArcaneTorrent_RDY = _, _;
 
-local HeroSpec, Racial = ids.HeroSpec, ids.Racial;
+local HeroSpec, Racial = ids.hero_spec, ids.racial;
 
 function ConRO:Stats()
 	_Player_Level = UnitLevel("player");
@@ -176,34 +163,9 @@ function ConRO:Stats()
 	_ArcaneTorrent, _ArcaneTorrent_RDY = ConRO:AbilityReady(Racial.ArcaneTorrent, timeShift);
 end
 
-function ConRO.Priest.Under10(_, timeShift, currentSpell, gcd, tChosen, pvpChosen)
-	wipe(ConRO.SuggestedSpells)
-	ConRO:Stats()
---Abilities
-
---Warnings
-
---Rotations
-
-return nil;
-end
-
-function ConRO.Priest.Under10Def(_, timeShift, currentSpell, gcd, tChosen, pvpChosen)
-	wipe(ConRO.SuggestedDefSpells)
-	ConRO:Stats()
---Abilities
-
---Warnings
-
---Rotations
-
-return nil;
-end
-
 function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpChosen)
 	wipe(ConRO.SuggestedSpells);
 	ConRO:Stats();
-	local Ability, Form, Buff, Debuff, PetAbility, PvPTalent = ids.Disc_Ability, ids.Disc_Form, ids.Disc_Buff, ids.Disc_Debuff, ids.Disc_PetAbility, ids.Disc_PvPTalent;
 
 --Abilities
 	local _AngelicFeather, _AngelicFeather_RDY = ConRO:AbilityReady(Ability.AngelicFeather, timeShift);	
@@ -224,10 +186,6 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 		local _Atonement_COUNT = ConRO:GroupBuffCount(Buff.Atonement);
 		local _Atonement_THRESHOLD = ConRO_AtonementBox:GetNumber();
 	local _PsychicScream, _PsychicScream_RDY = ConRO:AbilityReady(Ability.PsychicScream, timeShift);
-	local _PurgetheWicked, _PurgetheWicked_RDY = ConRO:AbilityReady(Ability.PurgetheWicked, timeShift);
-		local _PurgetheWicked_DEBUFF = ConRO:TargetAura(Debuff.PurgetheWicked, timeShift + 3);
-	local _Rapture, _Rapture_RDY = ConRO:AbilityReady(Ability.Rapture, timeShift);
-		local _Rapture_BUFF = ConRO:Aura(Buff.Rapture, timeShift);
 	local _ShadowWordDeath, _ShadowWordDeath_RDY = ConRO:AbilityReady(Ability.ShadowWordDeath, timeShift);
 	local _ShadowWordPain, _ShadowWordPain_RDY = ConRO:AbilityReady(Ability.ShadowWordPain, timeShift);
 		local _ShadowWordPain_DEBUFF = ConRO:TargetAura(Debuff.ShadowWordPain, timeShift + 3);
@@ -267,7 +225,6 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 
 	ConRO:AbilityBurst(_Shadowfiend, _Shadowfiend_RDY and ConRO:BurstMode(_Shadowfiend));
 	ConRO:AbilityBurst(_PowerInfusion, _PowerInfusion_RDY and ConRO:BurstMode(_PowerInfusion));
-	ConRO:AbilityBurst(_Rapture, _Rapture_RDY and not _Shadowfiend_RDY and not _ShadowCovenant_BUFF);
 	ConRO:AbilityBurst(_Evangelism, _Evangelism_RDY and ((ConRO:IsSolo() and _Atonement_COUNT == 1) or ((ConRO:InParty() or ConRO:InRaid()) and _Atonement_COUNT < _Atonement_THRESHOLD)));
 
 	ConRO:AbilityRaidBuffs(_PowerWordFortitude, _PowerWordFortitude_RDY and not ConRO:RaidBuff(Buff.PowerWordFortitude));
@@ -281,12 +238,7 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 --Rotations
 	repeat
 		while(true) do
-			if _PurgetheWicked_RDY and not _PurgetheWicked_DEBUFF then
-				tinsert(ConRO.SuggestedSpells, _PurgetheWicked);
-				_PurgetheWicked_DEBUFF = true;
-				_Queue = _Queue + 1;
-				break;
-			elseif not tChosen[Ability.PurgetheWicked.talentID] and _ShadowWordPain_RDY and not _ShadowWordPain_DEBUFF then
+			if _ShadowWordPain_RDY and not _ShadowWordPain_DEBUFF then
 				tinsert(ConRO.SuggestedSpells, _ShadowWordPain);
 				_ShadowWordPain_DEBUFF = true;
 				_Queue = _Queue + 1;
@@ -346,13 +298,12 @@ function ConRO.Priest.Discipline(_, timeShift, currentSpell, gcd, tChosen, pvpCh
 			break;
 		end
 	until _Queue >= 3;
-return nil;
+	return nil;
 end
 
 function ConRO.Priest.DisciplineDef(_, timeShift, currentSpell, gcd, tChosen, pvpChosen)
 	wipe(ConRO.SuggestedDefSpells);
 	ConRO:Stats();
-	local Ability, Form, Buff, Debuff, PetAbility, PvPTalent = ids.Disc_Ability, ids.Disc_Form, ids.Disc_Buff, ids.Disc_Debuff, ids.Disc_PetAbility, ids.Disc_PvPTalent;
 
 --Abilities
 	local _DesperatePrayer, _DesperatePrayer_RDY = ConRO:AbilityReady(Ability.DesperatePrayer, timeShift);
@@ -380,35 +331,29 @@ function ConRO.Priest.DisciplineDef(_, timeShift, currentSpell, gcd, tChosen, pv
 	if _Fade_RDY and not ConRO:IsSolo() and (ConRO:TarYou() or _enemies_in_melee >= 1) then
 		tinsert(ConRO.SuggestedDefSpells, _Fade);
 	end
-
-return nil;
+	return nil;
 end
 
 function ConRO.Priest.Holy(_, timeShift, currentSpell, gcd, tChosen, pvpChosen)
 	wipe(ConRO.SuggestedSpells);
 	ConRO:Stats();
-	local Ability, Form, Buff, Debuff, PetAbility, PvPTalent = ids.Holy_Ability, ids.Holy_Form, ids.Holy_Buff, ids.Holy_Debuff, ids.Holy_PetAbility, ids.Holy_PvPTalent;
 
 --Abilities
 	local _AngelicFeather, _AngelicFeather_RDY = ConRO:AbilityReady(Ability.AngelicFeather, timeShift);
 	local _Apotheosis, _Apotheosis_RDY = ConRO:AbilityReady(Ability.Apotheosis, timeShift);
 	local _DispelMagic, _DispelMagic_RDY = ConRO:AbilityReady(Ability.DispelMagic, timeShift);
 	local _DivineHymn, _DivineHymn_RDY = ConRO:AbilityReady(Ability.DivineHymn, timeShift);
+	local _DivineStar, _DivineStar_RDY = ConRO:AbilityReady(Ability.DivineStar, timeShift);
+	local _Halo, _Halo_RDY = ConRO:AbilityReady(Ability.Halo, timeShift);
 	local _HolyFire, _HolyFire_RDY = ConRO:AbilityReady(Ability.HolyFire, timeShift);
 	local _HolyNova, _HolyNova_RDY = ConRO:AbilityReady(Ability.HolyNova, timeShift);
 	local _HolyWordChastise, _HolyWordChastise_RDY = ConRO:AbilityReady(Ability.HolyWordChastise, timeShift);
 	local _PowerWordFortitude, _PowerWordFortitude_RDY = ConRO:AbilityReady(Ability.PowerWordFortitude, timeShift);
 	local _PsychicScream, _PsychicScream_RDY = ConRO:AbilityReady(Ability.PsychicScream, timeShift);
-	local _ShadowWordDeath, _ShadowWordDeath_RDY = ConRO:AbilityReady(Ability.ShadowWordDeath, timeShift);
 	local _ShadowWordPain, _ShadowWordPain_RDY = ConRO:AbilityReady(Ability.ShadowWordPain, timeShift);
 		local _ShadowWordPain_DEBUFF = ConRO:TargetAura(Debuff.ShadowWordPain, timeShift + 3);
 	local _Smite, _Smite_RDY = ConRO:AbilityReady(Ability.Smite, timeShift);
 
-
-	local _DivineStar, _DivineStar_RDY = ConRO:AbilityReady(Ability.DivineStar, timeShift);
-	local _Halo, _Halo_RDY = ConRO:AbilityReady(Ability.Halo, timeShift);
-	local _HolyWordSalvation, _HolyWordSalvation_RDY = ConRO:AbilityReady(Ability.HolyWordSalvation, timeShift);
-	local _Mindgames, _Mindgames_RDY = ConRO:AbilityReady(Ability.Mindgames, timeShift);
 
 --Indicators
 	ConRO:AbilityInterrupt(_PsychicScream, _PsychicScream_RDY and ((ConRO:Interrupt() and _target_in_melee) or (_target_in_melee and ConRO:TarYou())));
@@ -420,9 +365,6 @@ function ConRO.Priest.Holy(_, timeShift, currentSpell, gcd, tChosen, pvpChosen)
 
 	ConRO:AbilityBurst(_DivineHymn, _DivineHymn_RDY and _in_combat);
 	ConRO:AbilityBurst(_Apotheosis, _Apotheosis_RDY and _in_combat);
-	ConRO:AbilityBurst(_HolyWordSalvation, _HolyWordSalvation_RDY and _in_combat);
-
-	ConRO:AbilityBurst(_Mindgames, _Mindgames_RDY and _in_combat);
 
 --Warnings
 
@@ -430,6 +372,20 @@ function ConRO.Priest.Holy(_, timeShift, currentSpell, gcd, tChosen, pvpChosen)
 	if _is_Enemy then
 		repeat
 			while(true) do
+				if _HolyFire_RDY and currentSpell ~= _HolyFire then
+					tinsert(ConRO.SuggestedSpells, _HolyFire);
+					_HolyFire_RDY = false;
+					_Queue = _Queue + 1;
+					break;
+				end
+
+				if _HolyWordChastise_RDY then
+					tinsert(ConRO.SuggestedSpells, _HolyWordChastise);
+					_HolyWordChastise_RDY = false;
+					_Queue = _Queue + 1;
+					break;
+				end
+
 				if _DivineStar_RDY then
 					tinsert(ConRO.SuggestedSpells, _DivineStar);
 					_DivineStar_RDY = false;
@@ -444,30 +400,10 @@ function ConRO.Priest.Holy(_, timeShift, currentSpell, gcd, tChosen, pvpChosen)
 					break;
 				end
 
-				if _HolyWordChastise_RDY then
-					tinsert(ConRO.SuggestedSpells, _HolyWordChastise);
-					_HolyWordChastise_RDY = false;
-					_Queue = _Queue + 1;
-					break;
-				end
-
-				if _HolyFire_RDY and currentSpell ~= _HolyFire then
-					tinsert(ConRO.SuggestedSpells, _HolyFire);
-					_HolyFire_RDY = false;
-					_Queue = _Queue + 1;
-					break;
-				end
-
 				if _ShadowWordPain_RDY and not _ShadowWordPain_DEBUFF then
 					tinsert(ConRO.SuggestedSpells, _ShadowWordPain);
 					_ShadowWordPain_DEBUFF = true;
 					_Queue = _Queue + 1;
-					break;
-				end
-
-				if _HolyNova_RDY and _enemies_in_melee >= 3 then
-					tinsert(ConRO.SuggestedSpells, _HolyNova);
-					_Queue = _Queue + 3;
 					break;
 				end
 
@@ -483,20 +419,18 @@ function ConRO.Priest.Holy(_, timeShift, currentSpell, gcd, tChosen, pvpChosen)
 			end
 		until _Queue >= 3;
 	end
-return nil;
+	return nil;
 end
 
 function ConRO.Priest.HolyDef(_, timeShift, currentSpell, gcd, tChosen, pvpChosen)
 	wipe(ConRO.SuggestedDefSpells);
 	ConRO:Stats();
-	local Ability, Form, Buff, Debuff, PetAbility, PvPTalent = ids.Holy_Ability, ids.Holy_Form, ids.Holy_Buff, ids.Holy_Debuff, ids.Holy_PetAbility, ids.Holy_PvPTalent;
 
 --Abilities
 	local _GuardianSpirit, _GuardianSpirit_RDY = ConRO:AbilityReady(Ability.GuardianSpirit, timeShift);
 	local _DesperatePrayer, _DesperatePrayer_RDY = ConRO:AbilityReady(Ability.DesperatePrayer, timeShift);
 	local _PowerWordLife, _PowerWordLife_RDY = ConRO:AbilityReady(Ability.PowerWordLife, timeShift);
 	local _PowerWordShield, _PowerWordShield_RDY = ConRO:AbilityReady(Ability.PowerWordShield, timeShift);
-		local _WeakenedSoul_DEBUFF = ConRO:UnitAura(Debuff.WeakenedSoul, timeShift, 'player', 'HARMFUL');
 		local _PowerWordShield_BUFF = ConRO:Aura(Buff.PowerWordShield, timeShift);
 	local _Fade, _Fade_RDY = ConRO:AbilityReady(Ability.Fade, timeShift);
 
@@ -517,16 +451,15 @@ function ConRO.Priest.HolyDef(_, timeShift, currentSpell, gcd, tChosen, pvpChose
 		tinsert(ConRO.SuggestedDefSpells, _Fade);
 	end
 
-	if _PowerWordShield_RDY and not _WeakenedSoul_DEBUFF and not _PowerWordShield_BUFF then
+	if _PowerWordShield_RDY and not _PowerWordShield_BUFF then
 		tinsert(ConRO.SuggestedDefSpells, _PowerWordShield);
 	end
-return nil;
+	return nil;
 end
 
 function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen)
 	wipe(ConRO.SuggestedSpells);
 	ConRO:Stats();
-	local Ability, Form, Buff, Debuff, PetAbility, PvPTalent = ids.Shad_Ability, ids.Shad_Form, ids.Shad_Buff, ids.Shad_Debuff, ids.Shad_PetAbility, ids.Shad_PvPTalent;
 
 --Abilities
 	local _DarkAscension, _DarkAscension_RDY = ConRO:AbilityReady(Ability.DarkAscension, timeShift);
@@ -561,10 +494,10 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 		local _ShadowWordPain_DEBUFF, _, _ShadowWordPain_DUR = ConRO:TargetAura(Debuff.ShadowWordPain, timeShift);
 		local _Deathspeaker_BUFF = ConRO:Aura(Buff.Deathspeaker, timeShift);
 	local _Shadowform, _Shadowform_RDY = ConRO:AbilityReady(Ability.Shadowform, timeShift);
-		local _Shadowform_FORM = ConRO:Form(Form.Shadowform);
+		local _Shadowform_FORM = ConRO:Form(Buff.Shadowform);
 	local _VoidEruption, _VoidEruption_RDY = ConRO:AbilityReady(Ability.VoidEruption, timeShift);
 		local _Voidform_BUFF, _, _Voidform_DUR = ConRO:Aura(Buff.Voidform, timeShift);
-		local _Voidform_FORM = ConRO:Form(Form.Voidform);
+		local _Voidform_FORM = ConRO:Form(Buff.Voidform);
 	local _VoidBolt, _VoidBolt_RDY = ConRO:AbilityReady(Ability.VoidBolt, timeShift);
 	local _VampiricTouch, _VampiricTouch_RDY = ConRO:AbilityReady(Ability.VampiricTouch, timeShift);
 		local _VampiricTouch_DEBUFF, _, _VampiricTouch_DUR = ConRO:TargetAura(Debuff.VampiricTouch, timeShift);
@@ -867,13 +800,12 @@ function ConRO.Priest.Shadow(_, timeShift, currentSpell, gcd, tChosen, pvpChosen
 			break;
 		end
 	until _Queue >= 3;
-return nil;
+	return nil;
 end
 
 function ConRO.Priest.ShadowDef(_, timeShift, currentSpell, gcd, tChosen, pvpChosen)
 	wipe(ConRO.SuggestedDefSpells);
 	ConRO:Stats();
-	local Ability, Form, Buff, Debuff, PetAbility, PvPTalent = ids.Shad_Ability, ids.Shad_Form, ids.Shad_Buff, ids.Shad_Debuff, ids.Shad_PetAbility, ids.Shad_PvPTalent;
 
 --Abilities
 	local _DesperatePrayer, _DesperatePrayer_RDY = ConRO:AbilityReady(Ability.DesperatePrayer, timeShift);
@@ -912,5 +844,5 @@ function ConRO.Priest.ShadowDef(_, timeShift, currentSpell, gcd, tChosen, pvpCho
 	if _PowerWordShield_RDY and not _PowerWordShield_BUFF then
 		tinsert(ConRO.SuggestedDefSpells, _PowerWordShield);
 	end
-return nil;
+	return nil;
 end
